@@ -2,7 +2,7 @@
 
 Makers Academy - Final Project
 
-## The Project
+## The Project
 
 A mobile phone app to monitor your house plants
 
