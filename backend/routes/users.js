@@ -1,22 +1,29 @@
-const router = require("express").Router();
-let User = require("../models/user.model");
+const {User} = require('../models/user.model');
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
 
-router.route("/").get((req, res) => {
-  User.find()
-    .then((users) => res.json(users))
-    .catch((err) => res.status(400).json("Error: " + err));
-});
-// User.find returns promise in JSON format. Then returns users in JSON format. If error will return status 400 error.
+router.get(`/`, async (req, res) =>{
+    const userList = await User.find().select('-passwordHash');
 
-router.route("/add").post((req, res) => {
-  const username = req.body.username;
+    if(!userList) {
+        res.status(500).json({success: false})
+    }
+    res.send(userList);
+})
 
-  const newUser = new User({ username });
+router.post("/add", async(req, res) => {
+  let user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    passwordHash: bcrypt.hashSync(req.body.password, 10)
+  })
+  user = await user.save();
 
-  newUser
-    .save()
-    .then(() => res.json("User added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+  if(!user)
+    return res.status(400).send('the user cannot be created!')
+
+    res.send(user);
 });
 
 module.exports = router;
