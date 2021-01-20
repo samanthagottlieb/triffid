@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from "react-native";
+import PlantList from "./PlantList";
 
 //Flatlist Element is a list element with built in React Native features, such as pull to refresh.
 // renderItem({ item, index, separators });
@@ -24,12 +25,12 @@ const PlantContainer = () => {
   }, []);
 
   return (
-    <View style={{ marginTop: 100 }}>
+    <View style={{ marginTop: 10 }}>
       <Text>Plant Container</Text>
       <View style={{ marginTop: 100 }}>
         <FlatList
           data={plants}
-          renderItem={({ item }) => <Text>{item.nickname}</Text>}
+          renderItem={({ item }) => <PlantList key={item.id} item={item} />}
           keyExtractor={(item) => item._id}
         />
       </View>
