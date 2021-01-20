@@ -13,8 +13,7 @@ import SignupPage from "./Screens/User/SignupPage";
 export default function App() {
   return (
     <View style={styles.container}>
-      <Header />
-      <SignupPage />
+      <PlantContainer />
       <StatusBar style="auto" />
     </View>
   );
