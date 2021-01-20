@@ -1,0 +1,38 @@
+[
+  {
+    "pottyChange": "2012-04-23T18:25:43.511Z",
+    "_id": "600743bec5f04bcc9d841645",
+    "userid": "2131231",
+    "nickname": "Jeremy",
+    "type": "Cactus",
+    "wateringFrequency": 30,
+    "notes": "Testing",
+    "createdAt": "2021-01-19T20:40:30.925Z",
+    "updatedAt": "2021-01-19T20:40:30.925Z",
+    "__v": 0
+  },
+  {
+    "pottyChange": "2013-04-23T18:25:43.511Z",
+    "_id": "600743e3c5f04bcc9d841646",
+    "userid": "2131231",
+    "nickname": "Susan",
+    "type": "Tree",
+    "wateringFrequency": 1,
+    "notes": "Susan likes long walks in the park, and listening to Mills and Boon audiobooks",
+    "createdAt": "2021-01-19T20:41:07.132Z",
+    "updatedAt": "2021-01-19T20:41:07.132Z",
+    "__v": 0
+  },
+  {
+    "pottyChange": "2015-04-23T18:25:43.511Z",
+    "_id": "6007442fc5f04bcc9d841648",
+    "userid": "testestestest",
+    "nickname": "Diane",
+    "type": "Air Plant",
+    "wateringFrequency": 7,
+    "notes": "Dry AF",
+    "createdAt": "2021-01-19T20:42:23.793Z",
+    "updatedAt": "2021-01-19T20:42:23.793Z",
+    "__v": 0
+  }
+]
