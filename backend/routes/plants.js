@@ -1,33 +1,37 @@
+const { User } = require("../models/user.model");
 const router = require("express").Router();
 let Plant = require("../models/plant.model");
 
-router.route("/").get((req, res) => {
-  Plant.find()
-    .then((plants) => res.json(plants))
-    .catch((err) => res.status(400).json("Error: " + err));
+router.get("/", async (req, res) => {
+  // let filter = User.findById(req.body.id);
+  // const plantList = await Plant.find(filter)
+  const plantList = await Plant.find()
+  .select("nickname type wateringFrequency pottyChange notes -_id");
+
+  if(!plantList) {
+    res.status(500).json({success: false})
+  }
+  res.send(plantList);
 });
 
-router.route("/add").post((req, res) => {
-  const userid = req.body.userid;
-  const nickname = req.body.nickname;
-  const type = req.body.type;
-  const wateringFrequency = req.body.wateringFrequency;
-  const pottyChange = Date.parse(req.body.pottyChange);
-  const notes = req.body.notes;
+router.post("/add", async (req, res) => {
+  const userid = await User.findById(req.body.id);
+  if(!userid) return res.status(400).send('Invalid userid')
 
   const newPlant = new Plant({
-    userid,
-    nickname,
-    type,
-    wateringFrequency,
-    pottyChange,
-    notes,
-  });
+    userid: req.body.userid,
+    nickname: req.body.nickname,
+    type: req.body.type,
+    wateringFrequency: req.body.wateringFrequency,
+    pottyChange: Date.parse(req.body.pottyChange),
+    notes: req.body.notes,
+  })
+  newPlant = await newPlant.save();
 
-  newPlant
-    .save()
-    .then(() => res.json("Plant added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+  if(!newPlant)
+  return res.status(500).send("The plant could not be added.")
+
+  res.send(newPlant);
 });
 
 router.route("/:id").get((req, res) => {
