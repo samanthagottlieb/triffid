@@ -5,7 +5,7 @@ const Login = () => {
   const [title, setTitle] = useState("Login");
   return (
     <View>
-      <Text>{title}</Text>
+      <Text style={{ paddingTop: 50 }}>{title}</Text>
       <Button title="Change me" onPress={() => setTitle("Log in to Triffid")} />
     </View>
   );
