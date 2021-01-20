@@ -6,9 +6,13 @@ require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+const authJwt = require("./helpers/jwt");
 
 app.use(cors());
 app.use(express.json());
+
+//Middleware
+app.use(authJwt);
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
