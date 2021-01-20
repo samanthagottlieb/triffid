@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
+  // TouchableOpacity,
 } from "react-native";
 
 // Will need to import AsyncStorage to attain the JWT token to authenticate user to give priviladges to visit this page.
@@ -18,9 +16,7 @@ const AddPlantForm = (props) => {
   // Will also need some sort of setter here in order to receive the JWT to make the request to our API.
 
   return (
-  <FormContainer>
     
-  </FormContainer>
 };
 
 export default AddPlantForm;
