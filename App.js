@@ -6,10 +6,14 @@ import { StyleSheet, Text, View } from "react-native";
 import Header from "./Shared/Header";
 import PlantContainer from "./Screens/Plants/PlantContainer";
 
+import Login from "./Components/Login";
+
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Header />
+      <Login />
+      <StatusBar style="auto" />
     </View>
   );
 }
