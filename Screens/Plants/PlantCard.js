@@ -3,9 +3,9 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  Text,
   Button,
   Image,
+  Text,
 } from "react-native";
 
 var { width } = Dimensions.get("window");
@@ -29,22 +29,24 @@ const PlantCard = (props) => {
 const styles = StyleSheet.create({
   container: {
     width: width / 1.2,
-    height: width / 1.9,
-    padding: 10,
-    borderRadius: 10,
+    height: width / 3,
+    padding: 5,
+    borderRadius: 5,
     marginTop: 55,
     marginBottom: 5,
     marginLeft: 10,
+    flexDirection: "row",
+    overflow: "hidden",
     alignItems: "center",
-
     backgroundColor: "#CAD2C5",
   },
   image: {
-    width: width / 2 - 20 - 10,
-    height: width / 2 - 20 - 30,
+    width: width / 2 - 20 - 20,
+    height: width / 1.9,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
     backgroundColor: "transparent",
     position: "absolute",
-    top: -45,
   },
   card: {
     marginBottom: 10,
@@ -53,13 +55,13 @@ const styles = StyleSheet.create({
     width: width / 2 - 20 - 10,
   },
   title: {
-    fontWeight: "bold",
-    fontSize: 14,
+    color: "green",
+    fontSize: 20,
     textAlign: "center",
   },
   type: {
-    fontSize: 20,
-    color: "green",
+    fontWeight: "bold",
+    fontSize: 16,
     marginTop: 10,
   },
 });
