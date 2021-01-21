@@ -12,7 +12,7 @@ import AddPlant from "./Screens/Plants/AddPlant";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <View>
       <Header />
       <AddPlant />
       <StatusBar style="auto" />
@@ -20,10 +20,10 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
