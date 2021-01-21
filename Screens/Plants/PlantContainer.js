@@ -25,7 +25,8 @@ const PlantContainer = () => {
   }, []);
 
   return (
-    <View style={{ marginTop: 10, paddingBottom: 240 }}>
+    // Change the padding here when the Navbar at the bottom is added!
+    <View style={{ marginTop: 10, paddingBottom: 300 }}>
       <Text>My Terrerium</Text>
       <FlatList
         data={plants}

@@ -1,9 +1,5 @@
-// import React, { useState, useEffect } from "react";
-// import {
-//   View,
-//   Text,
-//   // TouchableOpacity,
-// } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, Button } from "react-native";
 
 // // Will need to import AsyncStorage to attain the JWT token to authenticate user to give priviladges to visit this page.
 
