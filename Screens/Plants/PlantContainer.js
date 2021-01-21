@@ -7,6 +7,7 @@ import {
   FlatList,
 } from "react-native";
 import PlantList from "./PlantList";
+import GreenPlusButton from "../../Components/GreenPlusButton";
 
 //Flatlist Element is a list element with built in React Native features, such as pull to refresh.
 // renderItem({ item, index, separators });
@@ -28,6 +29,8 @@ const PlantContainer = () => {
     // Change the padding here when the Navbar at the bottom is added!
     <View style={{ padding: 20 }}>
       <Text>My Terrarium</Text>
+      <GreenPlusButton />
+
       <FlatList
         data={plants}
         renderItem={({ item }) => <PlantList key={item.id} item={item} />}

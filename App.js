@@ -12,12 +12,12 @@ import PlantContainer from "./Screens/Plants/PlantContainer";
 import LoginPage from "./Screens/User/LoginPage";
 import SignupPage from "./Screens/User/SignupPage";
 import AddPlant from "./Screens/Plants/AddPlant";
+import SinglePlant from "./Screens/Plants/SinglePlant";
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Header />
-      <Main />
-    </NavigationContainer>
+    // <NavigationContainer>
+    <Text>Hello</Text>
+    // </NavigationContainer>
   );
 }
