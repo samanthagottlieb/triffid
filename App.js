@@ -5,7 +5,6 @@ import { StyleSheet, Text, View } from "react-native";
 //Screens
 import Header from "./Shared/Header";
 import PlantContainer from "./Screens/Plants/PlantContainer";
-import Login from "./Components/Login";
 import LoginPage from "./Screens/User/LoginPage";
 import SignupPage from "./Screens/User/SignupPage";
 import AddPlant from "./Screens/Plants/AddPlant";
@@ -14,7 +13,7 @@ export default function App() {
   return (
     <View>
       <Header />
-      <AddPlant />
+      <SignupPage />
       <StatusBar style="auto" />
     </View>
   );

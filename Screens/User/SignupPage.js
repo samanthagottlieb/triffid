@@ -1,61 +1,62 @@
-import React, { useState } from "react";
-import { TouchableOpacity, View, Button, TextInput, Text } from "react-native";
-import styles from "./styles";
+import React, { useEffect, useContext, useState } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
+import FormContainer from "../../Shared/Forms/FormContainer";
+import Input from "../../Shared/Forms/Input";
 
-const SignupPage = () => {
+const SignupPage = (props) => {
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
   return (
-    <View>
-      <Text style={[styles.title, styles.row]}>Welcome</Text>
-      <TextInput
-        style={styles.input}
+    <FormContainer title={"Sign up"}>
+      <Input
         label="Name"
-        placeholder="Name"
-        returnKeyType="next"
-        value={name.value}
-        onChangeText={(text) => setName({ value: text, error: "" })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="words"
-        textContentType="name"
+        placeholder={"Name"}
+        id={"name"}
+        name={"name"}
+        value={name}
+        onChangeText={(text) => setName(text.toLowerCase)}
       />
-      <TextInput
-        style={styles.input}
+      <Input
         label="Email"
-        placeholder="Email"
-        returnKeyType="next"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: "" })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
+        placeholder={"Email"}
+        id={"email"}
+        name={"email"}
+        value={email}
+        onChangeText={(text) => setEmail(text.toLowerCase)}
       />
-      <TextInput
-        style={styles.input}
+      <Input
         label="Password"
-        placeholder="Password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: "" })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
+        placeholder={"Password"}
+        id={"Password"}
+        secureTextEntry={true}
+        name={"password"}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
       />
-      <Button title="Sign Up" />
-      <View style={styles.row}>
-        <Text>Already have an account?</Text>
-        <TouchableOpacity>
-          <Text style={styles.link}>Log in</Text>
-        </TouchableOpacity>
+      <View style={styles.buttonGroup}>
+        <Button title="Sign up" />
       </View>
-    </View>
+      <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
+        <Text style={styles.middleText}>Already have an account??</Text>
+        <Button title="Log in"
+        // onPress={() => props.navigation.navigate("Login")}
+        />
+      </View>
+    </FormContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonGroup: {
+    width: "80%",
+    alignItems: "center",
+  },
+  middleText: {
+    marginBottom: 20,
+    alignSelf: "center",
+  },
+})
 
 export default SignupPage;
