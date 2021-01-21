@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: "white",
     margin: 10,
-    borderRadius: 20,
+    borderRadius: 5,
     padding: 10,
     borderWidth: 2,
-    borderColor: "orange",
+    borderColor: "black",
   },
 });
 

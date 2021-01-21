@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
-import { Item, Picker } from 'native-base';
-import DatePicker from "react-datepicker";
-import FormContainer from '../../../Shared/Forms/FormContainer'
-import Input from '../../../Shared/Forms/Input'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { Item, Picker } from "native-base";
+import FormContainer from "../../Shared/Forms/FormContainer";
+import Input from "../../Shared/Forms/Input";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // const plantTypes =
 
 const AddPlant = () => {
-
   const [nickname, setNickname] = useState();
   const [type, setType] = useState();
   const [wateringFrequency, setWateringFrequency] = useState();
@@ -18,53 +16,45 @@ const AddPlant = () => {
 
   return (
     <KeyboardAwareScrollView
-            // viewIsInsideTabBar={true}
-            extraHeight={200}
-            enableOnAndroid={true}
-        >
-            <FormContainer title={"Add a new plant"}>
-                <Input
-                    placeholder={"Nickname"}
-                    name={"Nickname"}
-                    value={nickname}
-                    onChangeText={(text) => setNickname(text)}
-                />
-                <Input
-                    placeholder={"Type of plant eg 'cactus'"}
-                    name={"Type"}
-                    value={type}
-                    onChangeText={(text) => setType(text)}
-                />
-                <Input
-                    placeholder={"Watering frequency"}
-                    name={"wateringFrequency"}
-                    value={wateringFrequency}
-                    keyboardType={"numeric"}
-                    onChangeText={(text) => setWateringFrequency(text)}
-                />
-                // <Input
-                //     placeholder={"Last pot change"}
-                //     name={"pottyChange"}
-                //     value={pottyChange}
-                //     keyboardType={"default"}
-                //     onChangeText={(text) => setPottyChange(text)}
-                // />
-                <Input
-                    placeholder={"Notes"}
-                    name={"Notes"}
-                    value={notes}
-                    onChangeText={(text) => setNotes(text)}
-                />
-            </Item>
-              <View style={{ width: '80%', alignItems: "center" }}>
-                  <Button title="Add plant"/>
-              </View>
-          </FormContainer>
-      </KeyboardAwareScrollView>
-  )
-}
+      // viewIsInsideTabBar={true}
+      extraHeight={200}
+      enableOnAndroid={true}
+    >
+      <FormContainer title={"Add a new plant"}>
+        <Input
+          placeholder={"Nickname"}
+          name={"Nickname"}
+          value={nickname}
+          onChangeText={(text) => setNickname(text)}
+        />
+        <Input
+          placeholder={"Type of plant eg 'cactus'"}
+          name={"Type"}
+          value={type}
+          onChangeText={(text) => setType(text)}
+        />
+        <Input
+          placeholder={"Watering frequency"}
+          name={"wateringFrequency"}
+          value={wateringFrequency}
+          keyboardType={"numeric"}
+          onChangeText={(text) => setWateringFrequency(text)}
+        />
+        <Input
+          placeholder={"Notes"}
+          name={"Notes"}
+          value={notes}
+          onChangeText={(text) => setNotes(text)}
+        />
+        <View style={{ width: "80%", alignItems: "center" }}>
+          <Button title="Add plant" />
+        </View>
+      </FormContainer>
+    </KeyboardAwareScrollView>
+  );
+};
 
-export default addPlant;
+export default AddPlant;
 
 // // Will need to import AsyncStorage to attain the JWT token to authenticate user to give priviladges to visit this page.
 
