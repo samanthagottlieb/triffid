@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     marginTop: 55,
-    marginBottom: 5,
     marginLeft: 10,
     overflow: "hidden",
     textAlign: "center",
@@ -66,7 +65,6 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   card: {
-    marginBottom: 10,
     height: width / 2 - 20 - 90,
     backgroundColor: "transparent",
     width: width / 2 - 20 - 10,
