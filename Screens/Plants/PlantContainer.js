@@ -25,15 +25,13 @@ const PlantContainer = () => {
   }, []);
 
   return (
-    <View style={{ marginTop: 10 }}>
-      <Text>Plant Container</Text>
-      <View style={{ marginTop: 100 }}>
-        <FlatList
-          data={plants}
-          renderItem={({ item }) => <PlantList key={item.id} item={item} />}
-          keyExtractor={(item) => item._id}
-        />
-      </View>
+    <View style={{ marginTop: 10, paddingBottom: 240 }}>
+      <Text>My Terrerium</Text>
+      <FlatList
+        data={plants}
+        renderItem={({ item }) => <PlantList key={item.id} item={item} />}
+        keyExtractor={(item) => item._id}
+      />
     </View>
   );
 };
