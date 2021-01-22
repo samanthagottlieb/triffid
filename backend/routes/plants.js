@@ -5,11 +5,12 @@ let Plant = require("../models/plant.model");
 router.get("/", async (req, res) => {
   // let filter = User.findById(req.body.id);
   // const plantList = await Plant.find(filter)
-  const plantList = await Plant.find()
-  .select("nickname type wateringFrequency pottyChange notes -_id");
+  const plantList = await Plant.find().select(
+    "nickname type wateringFrequency pottyChange notes -_id"
+  );
 
-  if(!plantList) {
-    res.status(500).json({success: false})
+  if (!plantList) {
+    res.status(500).json({ success: false });
   }
   res.send(plantList);
 });
