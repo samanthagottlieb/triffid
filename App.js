@@ -17,7 +17,10 @@ import SinglePlant from "./Screens/Plants/SinglePlant";
 export default function App() {
   return (
     // <NavigationContainer>
-    <Text>Hello</Text>
+    <View>
+      <Header />
+      <AddPlant />
+    </View>
     // </NavigationContainer>
   );
 }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
-import { Item, Picker, Textarea, DatePicker } from "native-base";
+import { Item, Picker, Textarea } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
+import GreenButton from "../../Components/GreenButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // const plantTypes =
@@ -53,15 +54,13 @@ const AddPlant = () => {
           onChangeText={(text) => setWateringFrequency(text)}
         />
         <Textarea
-          rowSpan={5}
+          rowSpan={8}
           bordered
           value={notes}
           placeholder="Notes?"
           onChangeText={(text) => setNotes(text)}
         />
-        <View style={{ width: "80%", alignItems: "center" }}>
-          <Button title="Add plant" />
-        </View>
+        <GreenButton text="Add plant" />
       </FormContainer>
     </KeyboardAwareScrollView>
   );
@@ -101,14 +100,5 @@ export default AddPlant;
 // export default AddPlantForm;
 // Date picker for pot change.
 // <View style={styles.container}>
-// <DatePicker
-//   placeholder="Date of last pot change"
-//   selectedValue={pottyChange}
-//   locale={"en"}
-//   timeZoneOffsetInMinutes={undefined}
-//   modalTransparent={false}
-//   animationType={"fade"}
-//   disabled={false}
-//   onDateChange={(e) => setPottyChange(e)}
-// />
+
 // </View>
