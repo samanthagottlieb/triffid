@@ -34,7 +34,6 @@ const PlantContainer = (props) => {
         renderItem={({ item }) => (
           <PlantList navigation={props.navigation} key={item.id} item={item} />
         )}
-        keyExtractor={(item) => item._id}
       />
     </View>
   );

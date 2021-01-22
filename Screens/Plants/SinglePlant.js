@@ -8,37 +8,43 @@ import {
   Text,
   ScrollView,
 } from "react-native";
+import Moment from "react-moment";
 import GreenButton from "../../Components/GreenButton";
 
 var { width } = Dimensions.get("window");
 
 const SinglePlant = (props) => {
-  const { nickname, type, wateringFrequency, pottyChange, notes } = props;
+  const [item, setItem] = useState(props.route.params.item);
   return (
-    <View style={styles.container}>
-      <View style={styles.upperContainer} />
-      <Image
-        source={require("../../assets/Plant2.jpg")}
-        style={styles.image}
-        nativeID="plantImage"
-      />
-      <View style={styles.lowerContainer}>
-        <Text style={styles.nickname}>{props.nickname}</Text>
-        <Text style={styles.attribute}>{props.type}</Text>
-        <Text style={styles.attribute}>
-          Watering Frequency: {props.wateringFrequency}
-        </Text>
-        <Text style={styles.attribute}>Potty Change: {props.pottyChange}</Text>
-        <Text style={styles.notes}>{props.notes}</Text>
-        <GreenButton text="Update" />
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.upperContainer} />
+        <Image
+          source={require("../../assets/Plant2.jpg")}
+          style={styles.image}
+          nativeID="plantImage"
+        />
+        <View style={styles.lowerContainer}>
+          <Text style={styles.nickname}>{item.nickname}</Text>
+          <Text style={styles.attribute}>{item.type}</Text>
+          <Text style={styles.attribute}>
+            Watering Frequency: {item.wateringFrequency}
+          </Text>
+          <Text style={styles.attribute}>
+            Potty Change: {item.pottyChange.slice(0, 10)}
+          </Text>
+          <Text style={styles.notes}>{item.notes}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <GreenButton text="Update" />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
   },
   upperContainer: {
@@ -52,11 +58,19 @@ const styles = StyleSheet.create({
   lowerContainer: {
     marginTop: -20,
     width: width / 1.1,
-    height: width * 1.2,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
+    minHeight: width * 1.25,
+    paddingBottom: 20,
     backgroundColor: "#CAD2C5",
     alignItems: "center",
+    marginBottom: "auto",
+  },
+  buttonContainer: {
+    width: width / 1.1,
+    backgroundColor: "#CAD2C5",
+    alignItems: "center",
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    paddingBottom: 20,
   },
   image: {
     marginTop: 50,
