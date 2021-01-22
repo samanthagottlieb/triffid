@@ -36,7 +36,12 @@ const SinglePlant = (props) => {
           <Text style={styles.notes}>{item.notes}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <GreenButton text="Update" />
+          <GreenButton
+            text="Update"
+            onPress={() =>
+              props.navigation.navigate("Edit Plant", { item: item })
+            }
+          />
         </View>
       </View>
     </ScrollView>
