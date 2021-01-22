@@ -16,10 +16,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-  // const userid = await User.findById(req.body.id);
-  // if(!userid) return res.status(400).send('Invalid userid')
-
-  const newPlant = new Plant({
+  let newPlant = new Plant({
     userid: req.body.userid,
     nickname: req.body.nickname,
     type: req.body.type,
@@ -29,13 +26,15 @@ router.post("/add", async (req, res) => {
   });
   newPlant = await newPlant.save();
 
-  if (!newPlant) return res.status(500).send("The plant could not be added.");
+  if(!newPlant)
+  return res.status(400).send("The plant could not be added.");
 
   res.send(newPlant);
 });
 
 router.route("/:id").get((req, res) => {
-  Plant.findById(req.params.id)
+  let userid = req.params.id;
+  Plant.find({ userid: userid }).exec()
     .then((plant) => res.json(plant))
     .catch((err) => res.status(400).json("Error: " + err));
 });
