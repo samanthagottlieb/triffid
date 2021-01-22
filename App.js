@@ -16,11 +16,9 @@ import SinglePlant from "./Screens/Plants/SinglePlant";
 
 export default function App() {
   return (
-    // <NavigationContainer>
-    <View>
+    <NavigationContainer>
       <Header />
-      <AddPlant />
-    </View>
-    // </NavigationContainer>
+      <Main />
+    </NavigationContainer>
   );
 }

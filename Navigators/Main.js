@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 // Stacks
 import PlantNavigator from "./Plants";
@@ -15,7 +15,7 @@ const Main = () => {
       tabBarOptions={{
         keyboardHidesTabBar: true,
         showLabel: false,
-        activeTintColor: "navy",
+        activeTintColor: "#354F52",
       }}
     >
       <Tab.Screen
@@ -23,7 +23,7 @@ const Main = () => {
         component={PlantNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="home" color={color} size={30} />
+            <Icon name="seedling" color={color} size={30} />
           ),
         }}
       />

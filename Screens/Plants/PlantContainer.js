@@ -29,8 +29,6 @@ const PlantContainer = () => {
     // Change the padding here when the Navbar at the bottom is added!
     <View style={{ padding: 20 }}>
       <Text>My Terrarium</Text>
-      <GreenPlusButton />
-
       <FlatList
         data={plants}
         renderItem={({ item }) => <PlantList key={item.id} item={item} />}
