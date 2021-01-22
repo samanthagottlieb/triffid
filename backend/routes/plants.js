@@ -32,8 +32,8 @@ router.post("/add", async (req, res) => {
 });
 
 router.route("/:id").get((req, res) => {
-  let id = req.params.id;
-  Plant.find({ userid: id }).exec()
+  let userid = req.params.id;
+  Plant.find({ userid: userid }).exec()
     .then((plant) => res.json(plant))
     .catch((err) => res.status(400).json("Error: " + err));
 });
