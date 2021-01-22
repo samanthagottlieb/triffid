@@ -14,7 +14,7 @@ import GreenPlusButton from "../../Components/GreenPlusButton";
 
 const data = require("../../assets/data/plants.json");
 
-const PlantContainer = () => {
+const PlantContainer = (props) => {
   const [plants, setPlants] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,9 @@ const PlantContainer = () => {
       <Text>My Terrarium</Text>
       <FlatList
         data={plants}
-        renderItem={({ item }) => <PlantList key={item.id} item={item} />}
+        renderItem={({ item }) => (
+          <PlantList navigation={props.navigation} key={item.id} item={item} />
+        )}
         keyExtractor={(item) => item._id}
       />
     </View>

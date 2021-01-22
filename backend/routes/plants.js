@@ -5,18 +5,19 @@ let Plant = require("../models/plant.model");
 router.get("/", async (req, res) => {
   // let filter = User.findById(req.body.id);
   // const plantList = await Plant.find(filter)
-  const plantList = await Plant.find()
-  .select("nickname type wateringFrequency pottyChange notes -_id");
+  const plantList = await Plant.find().select(
+    "nickname type wateringFrequency pottyChange notes -_id"
+  );
 
-  if(!plantList) {
-    res.status(500).json({success: false})
+  if (!plantList) {
+    res.status(500).json({ success: false });
   }
   res.send(plantList);
 });
 
 router.post("/add", async (req, res) => {
-  const userid = await User.findById(req.body.id);
-  if(!userid) return res.status(400).send('Invalid userid')
+  // const userid = await User.findById(req.body.id);
+  // if(!userid) return res.status(400).send('Invalid userid')
 
   const newPlant = new Plant({
     userid: req.body.userid,
@@ -25,11 +26,10 @@ router.post("/add", async (req, res) => {
     wateringFrequency: req.body.wateringFrequency,
     pottyChange: Date.parse(req.body.pottyChange),
     notes: req.body.notes,
-  })
+  });
   newPlant = await newPlant.save();
 
-  if(!newPlant)
-  return res.status(500).send("The plant could not be added.")
+  if (!newPlant) return res.status(500).send("The plant could not be added.");
 
   res.send(newPlant);
 });

@@ -16,6 +16,13 @@ function MyStack() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="Single Plant"
+        component={SinglePlant}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 }

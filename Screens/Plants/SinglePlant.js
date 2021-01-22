@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -6,6 +6,7 @@ import {
   Button,
   Image,
   Text,
+  ScrollView,
 } from "react-native";
 import GreenButton from "../../Components/GreenButton";
 
@@ -22,22 +23,13 @@ const SinglePlant = (props) => {
         nativeID="plantImage"
       />
       <View style={styles.lowerContainer}>
-        <Text style={styles.nickname}>{props.nickname}Nickname</Text>
-        <Text style={styles.attribute}>Type {props.type}</Text>
+        <Text style={styles.nickname}>{props.nickname}</Text>
+        <Text style={styles.attribute}>{props.type}</Text>
         <Text style={styles.attribute}>
-          Watering Frequency {props.wateringFrequency}
+          Watering Frequency: {props.wateringFrequency}
         </Text>
-        <Text style={styles.attribute}>Potty Change {props.pottyChange}</Text>
-        <Text style={styles.notes}>
-          {props.notes}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Text>
+        <Text style={styles.attribute}>Potty Change: {props.pottyChange}</Text>
+        <Text style={styles.notes}>{props.notes}</Text>
         <GreenButton text="Update" />
       </View>
     </View>

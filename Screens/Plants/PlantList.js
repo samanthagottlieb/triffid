@@ -6,7 +6,10 @@ var { width } = Dimensions.get("window");
 const PlantList = (props) => {
   const { item } = props;
   return (
-    <TouchableOpacity style={{ width: "50%" }}>
+    <TouchableOpacity
+      style={{ width: "50%" }}
+      onPress={() => props.navigation.navigate("Single Plant", { item: item })}
+    >
       <PlantCard {...item} />
     </TouchableOpacity>
   );
