@@ -3,9 +3,18 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
 
+// Context
+import AuthGlobal from "../../Context/store/AuthGlobal";
+import { loginUser } from "../../Context/action/Auth.action";
+
 const LoginPage = ({ navigation }) => {
+  const context = useContext(AuthGlobal);
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <FormContainer title={"Welcome"}>
