@@ -7,7 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 // Navigators
 import AuthStackScreen from "./Navigators/AuthNavigator";
-// import NavBar from "./Navigators/NavBar";
+import NavBar from "./Navigators/NavBar";
 // import PlantNavigator from "./Navigators/PlantNavigator";
 
 //Screens
@@ -21,6 +21,7 @@ import Loading from "./Screens/Loading";
 
 export default function App() {
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isSignedIn, setIsSignedIn] = React.useState(true);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -31,7 +32,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Header />
-      {isLoading ? <Loading /> : <AuthStackScreen />}
+      {isSignedIn ? <NavBar /> : <AuthStackScreen />}
     </NavigationContainer>
   );
 }
