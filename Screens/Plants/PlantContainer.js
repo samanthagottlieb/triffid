@@ -27,16 +27,30 @@ const PlantContainer = (props) => {
 
   return (
     // Change the padding here when the Navbar at the bottom is added!
-    <View style={{ padding: 20 }}>
-      <Text>My Terrarium</Text>
+    <View style={styles.container}>
+      <GreenPlusButton onPress={() => props.navigation.navigate("Add Plant")} />
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={plants}
         renderItem={({ item }) => (
-          <PlantList navigation={props.navigation} key={item.id} item={item} />
+          <PlantList
+            navigation={props.navigation}
+            key={item.name}
+            item={item}
+          />
         )}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 5,
+    marginBottom: 25,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default PlantContainer;

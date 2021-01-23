@@ -43,9 +43,9 @@ const EditPlant = (props) => {
         </Item>
       </View>
       <Input
+        value={wateringFrequency}
         placeholder={"Update Watering Frequency"}
         name={"wateringFrequency"}
-        value={wateringFrequency}
         keyboardType={"numeric"}
         onChangeText={(text) => setWateringFrequency(text)}
       />
