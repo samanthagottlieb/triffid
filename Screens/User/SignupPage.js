@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
 
-const SignupPage = (props) => {
+const SignupPage = ({ navigation }) => {
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
@@ -40,10 +40,7 @@ const SignupPage = (props) => {
       </View>
       <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
         <Text style={styles.middleText}>Already have an account??</Text>
-        <Button
-          title="Log in"
-          // onPress={() => props.navigation.navigate("Login")}
-        />
+        <Button title="Log in" onPress={() => navigation.navigate("Login")} />
       </View>
     </FormContainer>
   );
