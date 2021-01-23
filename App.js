@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 // Navigators
-import Main from "./Navigators/Main";
+import NavBar from "./Navigators/NavBar";
 
 //Screens
 import Header from "./Shared/Header";
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Header />
-      <Main />
+      <NavBar />
     </NavigationContainer>
   );
 }
