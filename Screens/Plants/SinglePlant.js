@@ -8,7 +8,6 @@ import {
   Text,
   ScrollView,
 } from "react-native";
-import Moment from "react-moment";
 import GreenButton from "../../Components/GreenButton";
 
 var { width } = Dimensions.get("window");
