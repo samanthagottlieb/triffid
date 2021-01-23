@@ -40,9 +40,9 @@ const SignupPage = (props) => {
       </View>
       <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
         <Text style={styles.middleText}>Already have an account??</Text>
-        <Button title="Log in"
-        // onPress={() => props.navigation.navigate("Login")}
-        />
+        <Button title={"Log in"} onPress={
+          () => props.navigation.navigate("LoginPage")
+        }/>
       </View>
     </FormContainer>
   );
