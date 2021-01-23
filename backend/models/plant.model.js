@@ -6,8 +6,8 @@ const plantSchema = new Schema(
   {
     userid: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
+      ref: "User",
+      required: true,
     },
     nickname: { type: String, required: true },
     type: { type: String, required: true },
