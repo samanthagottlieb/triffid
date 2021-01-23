@@ -10,18 +10,17 @@ const GreenPlusButton = ({ onPress }) => (
 
 const styles = StyleSheet.create({
   appButtonContainer: {
-    elevation: 8,
     backgroundColor: "#84A98C",
     borderRadius: 150 / 2,
-    height: 60,
-    width: 60,
+    height: 40,
+    width: 40,
+    marginBottom: 5,
+    justifyContent: "center",
   },
   appButtonText: {
-    fontSize: 40,
-    lineHeight: 36,
+    fontSize: 30,
     color: "white",
-    textAlign: "center",
-    padding: 15,
+    left: 8,
   },
 });
 export default GreenPlusButton;

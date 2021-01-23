@@ -54,13 +54,14 @@ const AddPlant = () => {
           onChangeText={(text) => setWateringFrequency(text)}
         />
         <Textarea
+          style={styles.notes}
           rowSpan={8}
           bordered
           value={notes}
           placeholder="Notes?"
           onChangeText={(text) => setNotes(text)}
         />
-        <GreenButton text="Add plant" />
+        <GreenButton style={styles.buttons} text="Add plant" />
       </FormContainer>
     </KeyboardAwareScrollView>
   );
@@ -78,6 +79,22 @@ const styles = StyleSheet.create({
     borderColor: "#84A98C",
     fontSize: 15,
     color: "#CAD2C5",
+  },
+  notes: {
+    width: "80%",
+    height: 180,
+    backgroundColor: "white",
+    margin: 30,
+    borderRadius: 5,
+    padding: 10,
+    borderWidth: 4,
+    borderColor: "#84A98C",
+    fontSize: 17,
+    color: "#CAD2C5",
+  },
+  buttons: {
+    height: 115,
+    justifyContent: "space-between",
   },
 });
 
