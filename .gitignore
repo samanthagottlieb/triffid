@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 backend/.env
+backend/coverage/
 backend/node_modules/
 
 # macOS
