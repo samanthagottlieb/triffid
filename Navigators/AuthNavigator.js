@@ -4,29 +4,27 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "../Screens/User/LoginPage";
 import SignupPage from "../Screens/User/SignupPage";
 
-const Stack = createStackNavigator();
+const AuthStack = createStackNavigator();
 
-function MyStack() {
+function AuthStackScreen() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <AuthStack.Navigator>
+      <AuthStack.Screen
         name="Login"
         component={LoginPage}
         options={{
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <AuthStack.Screen
         name="Signup"
         component={SignupPage}
         options={{
           headerShown: false,
         }}
       />
-    </Stack.Navigator>
+    </AuthStack.Navigator>
   );
 }
 
-export default function AuthNavigator() {
-  return <MyStack />;
-}
+export default AuthStackScreen;
