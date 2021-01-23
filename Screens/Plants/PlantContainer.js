@@ -26,10 +26,9 @@ const PlantContainer = (props) => {
       .get(`${baseURL}plants`)
       .then((res) => {
         setPlants(res.data);
-        console.log(res);
       })
       .catch((error) => {
-        console.log("Api call error");
+        console.log(`Error message: ${error}`);
       });
 
     return () => {
