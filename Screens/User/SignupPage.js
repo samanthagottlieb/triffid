@@ -16,7 +16,7 @@ const SignupPage = (props) => {
         id={"name"}
         name={"name"}
         value={name}
-        onChangeText={(text) => setName(text.toLowerCase)}
+        onChangeText={(text) => setName(text.toLowerCase())}
       />
       <Input
         label="Email"
@@ -24,7 +24,7 @@ const SignupPage = (props) => {
         id={"email"}
         name={"email"}
         value={email}
-        onChangeText={(text) => setEmail(text.toLowerCase)}
+        onChangeText={(text) => setEmail(text.toLowerCase())}
       />
       <Input
         label="Password"
@@ -40,8 +40,9 @@ const SignupPage = (props) => {
       </View>
       <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
         <Text style={styles.middleText}>Already have an account??</Text>
-        <Button title="Log in"
-        // onPress={() => props.navigation.navigate("Login")}
+        <Button
+          title="Log in"
+          // onPress={() => props.navigation.navigate("Login")}
         />
       </View>
     </FormContainer>
@@ -57,6 +58,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignSelf: "center",
   },
-})
+});
 
 export default SignupPage;
