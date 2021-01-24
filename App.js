@@ -1,9 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+
+// Context API
+import Auth from "./Context/store/Auth";
+import AuthGlobal from "./Context/store/AuthGlobal";
 
 // Navigators
 import AuthStackScreen from "./Navigators/AuthNavigator";
@@ -20,19 +24,20 @@ import SinglePlant from "./Screens/Plants/SinglePlant";
 import Loading from "./Screens/Loading";
 
 export default function App() {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [isSignedIn, setIsSignedIn] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const context = useContext(AuthGlobal);
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(!isLoading);
-    }, 500);
-  }, []);
+  // useEffect(() => {
+  //   context.stateUser.isAuthenticated;
+  // }, [context.stateUser.isAuthenticated]);
 
   return (
-    <NavigationContainer>
-      <Header />
-      {isSignedIn ? <NavBar /> : <AuthStackScreen />}
-    </NavigationContainer>
+    <Auth>
+      <NavigationContainer>
+        <Header />
+        <AuthStackScreen />
+        
+      </NavigationContainer>
+    </Auth>
   );
 }

@@ -3,9 +3,33 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
 
+// Context
+import AuthGlobal from "../../Context/store/AuthGlobal";
+import { loginUser } from "../../Context/actions/Auth.actions";
+
 const LoginPage = ({ navigation }) => {
+  const context = useContext(AuthGlobal);
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+
+  useEffect(() => {
+    if (context.stateUser.isAuthenticated === true) {
+      navigation.navigate("Plants")
+    }
+  }, [context.stateUser.isAuthenticated])
+
+  const handleSubmit = () => {
+    const user = {
+      email,
+      password
+    }
+
+    if (email === "" || password === "") {
+      setError("Please fill in your email and password")
+    } else {
+      loginUser(user, context.dispatch)
+    }
+  }
 
   return (
     <FormContainer title={"Welcome"}>
@@ -27,7 +51,7 @@ const LoginPage = ({ navigation }) => {
         onChangeText={(text) => setPassword(text)}
       />
       <View style={styles.buttonGroup}>
-        <Button title="Login" onPress={() => navigation.navigate("Login")} />
+        <Button title="Login" onPress={() => handleSubmit()} />
       </View>
       <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
         <Text style={styles.middleText}>Don't have an account yet?</Text>
