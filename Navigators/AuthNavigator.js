@@ -27,4 +27,6 @@ function AuthStackScreen() {
   );
 }
 
-export default AuthStackScreen;
+export default function AuthNavigator() {
+  return <AuthStackScreen />
+}

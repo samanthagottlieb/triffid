@@ -1,6 +1,5 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 // Stacks
@@ -8,7 +7,7 @@ import PlantNavigator from "./PlantNavigator";
 
 const Tab = createBottomTabNavigator();
 
-const NavBar = () => {
+function NavBar() {
   return (
     <Tab.Navigator
       initialRouteName="Plants"
@@ -45,8 +44,10 @@ const NavBar = () => {
           ),
         }}
       />
-    </Tab.Navigator>
+    </Tab.Navigator>  
   );
 };
 
-export default NavBar;
+export default function NavBarNavigator() {
+  return <NavBar />
+};
