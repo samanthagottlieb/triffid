@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   View,
   Text,
@@ -10,8 +10,10 @@ import PlantList from "./PlantList";
 import GreenPlusButton from "../../Components/GreenPlusButton";
 import { Row } from "native-base";
 
+import AsyncStorage from "@react-native-community/async-storage";
 import baseURL from "../../assets/common/baseUrl";
 import axios from "axios";
+import AuthGlobal from "../../Context/store/AuthGlobal";
 
 //Flatlist Element is a list element with built in React Native features, such as pull to refresh.
 // renderItem({ item, index, separators });
@@ -20,16 +22,26 @@ import axios from "axios";
 
 const PlantContainer = (props) => {
   const [plants, setPlants] = useState([]);
+  const context = useContext(AuthGlobal);
+  const user = context.stateUser.user.userId;
+  console.log(typeof user);
 
   useEffect(() => {
-    axios
-      .get(`${baseURL}plants`)
+
+    AsyncStorage.getItem("jwt")
       .then((res) => {
-        setPlants(res.data);
-      })
-      .catch((error) => {
-        console.log(`Error message: ${error}`);
-      });
+        axios
+        .get(`${baseURL}plants/${user}`, {
+          headers: { Authorization: `Bearer ${res}` },
+        })
+        .then((res) => {
+          setPlants(res.data);
+        })
+        .catch((error) => {
+          console.log(`Error message: ${error}`);
+        });
+      } )
+   
 
     return () => {
       setPlants([]);
