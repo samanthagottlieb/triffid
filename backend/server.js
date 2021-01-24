@@ -36,5 +36,5 @@ app.use("/users", usersRouter);
 // Whenever someone goes to root url / exercises it'll reditect to users router etc.
 
 app.listen(port, () => {
-  console.log(`Sever is running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
