@@ -24,13 +24,10 @@ const PlantContainer = (props) => {
   const [plants, setPlants] = useState([]);
   const context = useContext(AuthGlobal);
   const user = context.stateUser.user.userId;
-  console.log(typeof user);
 
   useEffect(() => {
-
-    AsyncStorage.getItem("jwt")
-      .then((res) => {
-        axios
+    AsyncStorage.getItem("jwt").then((res) => {
+      axios
         .get(`${baseURL}plants/${user}`, {
           headers: { Authorization: `Bearer ${res}` },
         })
@@ -40,8 +37,7 @@ const PlantContainer = (props) => {
         .catch((error) => {
           console.log(`Error message: ${error}`);
         });
-      } )
-   
+    });
 
     return () => {
       setPlants([]);

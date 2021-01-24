@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { Item, Picker, Textarea } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -6,17 +6,50 @@ import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
 import GreenButton from "../../Components/GreenButton";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AuthGlobal from "../../Context/store/AuthGlobal";
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
+import AsyncStorage from "@react-native-community/async-storage";
 
 // const plantTypes =
 
 const PlantTypes = require("../../assets/data/PlantTypes.json");
 
-const AddPlant = () => {
+const AddPlant = (props) => {
   const [nickname, setNickname] = useState();
   const [type, setType] = useState();
   const [wateringFrequency, setWateringFrequency] = useState();
   const [pottyChange, setPottyChange] = useState();
   const [notes, setNotes] = useState();
+  const context = useContext(AuthGlobal);
+  // const user = context.stateUser.user.userId;
+
+  const handleSubmit = () => {
+    const plant = {
+      nickname,
+      type,
+      wateringFrequency,
+      pottyChange,
+      notes,
+    };
+    if (nickname === "" || type === "") {
+      setError("Please fill in the plant information");
+    } else {
+      AsyncStorage.getItem("jwt").then((res) => {
+        axios
+          .post(`${baseURL}plants/add`, plant, {
+            headers: { Authorization: `Bearer ${res}` },
+          })
+          .then((response) => {
+            dispatch(plant);
+          })
+          .then(props.navigation.navigate("Plants"))
+          .catch((error) => {
+            console.log(`Error message: ${error}`);
+          });
+      });
+    }
+  };
 
   return (
     <KeyboardAwareScrollView
@@ -61,7 +94,11 @@ const AddPlant = () => {
           placeholder="Notes?"
           onChangeText={(text) => setNotes(text)}
         />
-        <GreenButton style={styles.buttons} text="Add plant" />
+        <GreenButton
+          style={styles.buttons}
+          text="Add plant"
+          onPress={() => handleSubmit()}
+        />
       </FormContainer>
     </KeyboardAwareScrollView>
   );
