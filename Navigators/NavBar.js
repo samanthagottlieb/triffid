@@ -8,7 +8,7 @@ import PlantNavigator from "./PlantNavigator";
 
 const Tab = createBottomTabNavigator();
 
-const Main = () => {
+const NavBar = () => {
   return (
     <Tab.Navigator
       initialRouteName="Plants"
@@ -49,4 +49,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default NavBar;

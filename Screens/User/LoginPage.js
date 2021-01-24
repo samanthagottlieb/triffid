@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
 
-const LoginPage = (props) => {
+const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
@@ -15,7 +15,7 @@ const LoginPage = (props) => {
         id={"email"}
         name={"email"}
         value={email}
-        onChangeText={(text) => setEmail(text.toLowerCase)}
+        onChangeText={(text) => setEmail(text.toLowerCase())}
       />
       <Input
         label="Password"
@@ -27,13 +27,11 @@ const LoginPage = (props) => {
         onChangeText={(text) => setPassword(text)}
       />
       <View style={styles.buttonGroup}>
-        <Button title="Login" />
+        <Button title="Login" onPress={() => navigation.navigate("Login")} />
       </View>
       <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
         <Text style={styles.middleText}>Don't have an account yet?</Text>
-        <Button title="Register"
-        // onPress={() => props.navigation.navigate("Register")}
-        />
+        <Button title="Signup" onPress={() => navigation.navigate("Signup")} />
       </View>
     </FormContainer>
   );
@@ -48,6 +46,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignSelf: "center",
   },
-})
+});
 
 export default LoginPage;
