@@ -10,16 +10,26 @@ import PlantList from "./PlantList";
 import GreenPlusButton from "../../Components/GreenPlusButton";
 import { Row } from "native-base";
 
+import baseURL from "../../assets/common/baseUrl";
+import axios from "axios";
+
 //Flatlist Element is a list element with built in React Native features, such as pull to refresh.
 // renderItem({ item, index, separators });
 
-const data = require("../../assets/data/plants.json");
+// const data = require("../../assets/data/plants.json");
 
 const PlantContainer = (props) => {
   const [plants, setPlants] = useState([]);
 
   useEffect(() => {
-    setPlants(data);
+    axios
+      .get(`${baseURL}plants`)
+      .then((res) => {
+        setPlants(res.data);
+      })
+      .catch((error) => {
+        console.log(`Error message: ${error}`);
+      });
 
     return () => {
       setPlants([]);
