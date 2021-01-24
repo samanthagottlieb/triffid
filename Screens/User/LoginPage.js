@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
+import Error from "../../Shared/Error";
 
 // Context
 import AuthGlobal from "../../Context/store/AuthGlobal";
@@ -11,6 +12,7 @@ const LoginPage = ({ navigation }) => {
   const context = useContext(AuthGlobal);
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+  const [error, setError] = useState({ value: "", error: "" });
 
   useEffect(() => {
     if (context.stateUser.isAuthenticated === true) {

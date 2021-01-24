@@ -14,11 +14,6 @@ import Main from "./Navigators/Main";
 import Header from "./Shared/Header";
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  // useEffect(() => {
-  //   context.stateUser.isAuthenticated;
-  // }, [context.stateUser.isAuthenticated]);
 
   return (
     <Auth>
