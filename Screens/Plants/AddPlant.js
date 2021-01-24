@@ -44,7 +44,7 @@ const AddPlant = (props) => {
           .then((response) => {
             console.log(response);
           })
-          .then(props.navigation.navigate("Plants"))
+          .then(props.navigation.push("Plants"))
           .catch((error) => {
             console.log(`Error message: ${error}`);
           });
