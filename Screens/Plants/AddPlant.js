@@ -26,11 +26,12 @@ const AddPlant = (props) => {
 
   const handleSubmit = () => {
     const plant = {
-      nickname,
-      type,
-      wateringFrequency,
-      pottyChange,
-      notes,
+      userid: context.stateUser.user.userId,
+      nickname: nickname,
+      type: type,
+      wateringFrequency: wateringFrequency,
+      pottyChange: pottyChange,
+      notes: notes,
     };
     if (nickname === "" || type === "") {
       setError("Please fill in the plant information");
@@ -41,7 +42,7 @@ const AddPlant = (props) => {
             headers: { Authorization: `Bearer ${res}` },
           })
           .then((response) => {
-            dispatch(plant);
+            console.log(response);
           })
           .then(props.navigation.navigate("Plants"))
           .catch((error) => {

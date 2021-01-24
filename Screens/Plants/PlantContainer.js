@@ -45,9 +45,9 @@ const PlantContainer = (props) => {
   }, []);
 
   return (
-    // Change the padding here when the Navbar at the bottom is added! <GreenPlusButton onPress={() => props.navigation.navigate("Add Plant")} />
-    <View styles={styles.buttonContainer}>
+    <View style={styles.container}>
       <GreenPlusButton onPress={() => props.navigation.navigate("Add Plant")} />
+
       <View style={styles.container}>
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -67,13 +67,19 @@ const PlantContainer = (props) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flexDirection: "row",
+    // flexDirection: "row",
   },
   container: {
     marginTop: 5,
-    marginBottom: 25,
-    justifyContent: "center",
+    marginBottom: 45,
+    marginLeft: -6,
     alignItems: "center",
+  },
+  text: {
+    flexDirection: "row",
+    fontSize: 30,
+    color: "#2f3E46",
+    justifyContent: "flex-end",
   },
 });
 

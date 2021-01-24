@@ -12,7 +12,7 @@ const plantSchema = new Schema(
     nickname: { type: String, required: true },
     type: { type: String, required: true },
     wateringFrequency: { type: Number, required: false },
-    pottyChange: { type: Date, default: "" },
+    pottyChange: { type: Date, required: false },
     notes: { type: String, required: false },
   },
   {

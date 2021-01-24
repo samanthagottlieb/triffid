@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    color: "#2f3E46",
   },
 });
 
