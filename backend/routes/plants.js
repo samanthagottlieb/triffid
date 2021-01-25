@@ -52,7 +52,7 @@ router.route("/update/:id").post((req, res) => {
       plant.nickname = req.body.nickname;
       plant.type = req.body.type;
       plant.wateringFrequency = req.body.wateringFrequency;
-      plant.pottyChange = Date.parse(req.body.pottyChange);
+      plant.pottyChange = req.body.pottyChange;
       plant.notes = req.body.notes;
 
       plant
