@@ -17,14 +17,14 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.virtual("id").get(function () {
-  return this._id.toHexString();
-});
+// userSchema.virtual("id").get(function () {
+//   return this._id.toHexString();
+// });
 
-userSchema.set("toJSON", {
-  virtuals: true,
-});
+// userSchema.set("toJSON", {
+//   virtuals: true,
+// });
+
 // Corrected formatting of the virtuals so that it returns 'id' correctly.
 
-exports.User = mongoose.model("User", userSchema);
-exports.userSchema = userSchema;
+module.exports = User = mongoose.model("User", userSchema);
