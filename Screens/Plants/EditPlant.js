@@ -21,7 +21,13 @@ const EditPlant = (props) => {
   const [notes, setNotes] = useState(props.route.params.item.notes);
 
   return (
-    <FormContainer title="Edit Plant">
+    <FormContainer
+      title={
+        props.route.params.item.nickname.length < 10
+          ? `Edit ${props.route.params.item.nickname}`
+          : `Edit Plant`
+      }
+    >
       <Input
         placeholder={"Update Nickname"}
         name={"Nickname"}
@@ -58,10 +64,8 @@ const EditPlant = (props) => {
         onChangeText={(text) => setNotes(text)}
       />
       <View style={styles.buttons}>
-        <GreenButton text={`Update ${props.route.params.item.nickname}`} />
-        <SecondaryGreenButton
-          text={`Delete ${props.route.params.item.nickname}`}
-        />
+        <GreenButton text={`Update`} />
+        <SecondaryGreenButton text={`Delete`} />
       </View>
     </FormContainer>
   );

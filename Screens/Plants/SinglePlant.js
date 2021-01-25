@@ -30,7 +30,10 @@ const SinglePlant = (props) => {
             Watering Frequency: {item.wateringFrequency}
           </Text>
           <Text style={styles.attribute}>
-            Potty Change: {item.pottyChange.slice(0, 10)}
+            Potty Change:{" "}
+            {item.pottyChange === undefined
+              ? "Information not available"
+              : item.pottyChange.slice(0, 10)}
           </Text>
           <Text style={styles.notes}>{item.notes}</Text>
         </View>

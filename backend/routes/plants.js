@@ -21,20 +21,20 @@ router.post("/add", async (req, res) => {
     nickname: req.body.nickname,
     type: req.body.type,
     wateringFrequency: req.body.wateringFrequency,
-    pottyChange: Date.parse(req.body.pottyChange),
+    pottyChange: req.body.pottyChange,
     notes: req.body.notes,
   });
   newPlant = await newPlant.save();
 
-  if(!newPlant)
-  return res.status(400).send("The plant could not be added.");
+  if (!newPlant) return res.status(400).send("The plant could not be added.");
 
   res.send(newPlant);
 });
 
 router.route("/:id").get((req, res) => {
   let userid = req.params.id;
-  Plant.find({ userid: userid }).exec()
+  Plant.find({ userid: userid })
+    .exec()
     .then((plant) => res.json(plant))
     .catch((err) => res.status(400).json("Error: " + err));
 });

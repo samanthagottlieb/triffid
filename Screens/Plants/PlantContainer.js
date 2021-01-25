@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 import PlantList from "./PlantList";
 import GreenPlusButton from "../../Components/GreenPlusButton";
 import { Row } from "native-base";
-
+import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
 import baseURL from "../../assets/common/baseUrl";
 import axios from "axios";
@@ -24,38 +24,36 @@ const PlantContainer = (props) => {
   const [plants, setPlants] = useState([]);
   const context = useContext(AuthGlobal);
   const user = context.stateUser.user.userId;
-  console.log(typeof user);
 
-  useEffect(() => {
-
-    AsyncStorage.getItem("jwt")
-      .then((res) => {
+  useFocusEffect(
+    useCallback(() => {
+      AsyncStorage.getItem("jwt").then((res) => {
         axios
-        .get(`${baseURL}plants/${user}`, {
-          headers: { Authorization: `Bearer ${res}` },
-        })
-        .then((res) => {
-          setPlants(res.data);
-        })
-        .catch((error) => {
-          console.log(`Error message: ${error}`);
-        });
-      } )
-   
+          .get(`${baseURL}plants/${user}`, {
+            headers: { Authorization: `Bearer ${res}` },
+          })
+          .then((res) => {
+            setPlants(res.data);
+          })
+          .catch((error) => {
+            console.log(`Error message: ${error}`);
+          });
+      });
 
-    return () => {
-      setPlants([]);
-    };
-  }, []);
+      return () => {
+        setPlants([]);
+      };
+    }, [])
+  );
 
   return (
-    // Change the padding here when the Navbar at the bottom is added! <GreenPlusButton onPress={() => props.navigation.navigate("Add Plant")} />
-    <View styles={styles.buttonContainer}>
+    <View style={styles.container}>
       <GreenPlusButton onPress={() => props.navigation.navigate("Add Plant")} />
+
       <View style={styles.container}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={plants}
+          data={plants.reverse()}
           renderItem={({ item }) => (
             <PlantList
               navigation={props.navigation}
@@ -71,13 +69,19 @@ const PlantContainer = (props) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flexDirection: "row",
+    // flexDirection: "row",
   },
   container: {
     marginTop: 5,
-    marginBottom: 25,
-    justifyContent: "center",
+    marginBottom: 45,
+    marginLeft: -6,
     alignItems: "center",
+  },
+  text: {
+    flexDirection: "row",
+    fontSize: 30,
+    color: "#2f3E46",
+    justifyContent: "flex-end",
   },
 });
 
