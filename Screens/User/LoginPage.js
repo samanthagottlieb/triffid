@@ -14,22 +14,22 @@ const LoginPage = ({ navigation }) => {
 
   useEffect(() => {
     if (context.stateUser.isAuthenticated === true) {
-      navigation.navigate("Plants")
+      navigation.navigate("Plants");
     }
-  }, [context.stateUser.isAuthenticated])
+  }, [context.stateUser.isAuthenticated]);
 
   const handleSubmit = () => {
     const user = {
       email,
-      password
-    }
+      password,
+    };
 
     if (email === "" || password === "") {
-      setError("Please fill in your email and password")
+      setError("Please fill in your email and password");
     } else {
-      loginUser(user, context.dispatch)
+      loginUser(user, context.dispatch);
     }
-  }
+  };
 
   return (
     <FormContainer title={"Welcome"}>

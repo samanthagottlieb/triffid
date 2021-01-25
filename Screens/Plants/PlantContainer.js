@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 import PlantList from "./PlantList";
 import GreenPlusButton from "../../Components/GreenPlusButton";
 import { Row } from "native-base";
-
+import { useFocusEffect } from "@react-navigation/native";
 import AsyncStorage from "@react-native-community/async-storage";
 import baseURL from "../../assets/common/baseUrl";
 import axios from "axios";
@@ -25,24 +25,26 @@ const PlantContainer = (props) => {
   const context = useContext(AuthGlobal);
   const user = context.stateUser.user.userId;
 
-  useEffect(() => {
-    AsyncStorage.getItem("jwt").then((res) => {
-      axios
-        .get(`${baseURL}plants/${user}`, {
-          headers: { Authorization: `Bearer ${res}` },
-        })
-        .then((res) => {
-          setPlants(res.data);
-        })
-        .catch((error) => {
-          console.log(`Error message: ${error}`);
-        });
-    });
+  useFocusEffect(
+    useCallback(() => {
+      AsyncStorage.getItem("jwt").then((res) => {
+        axios
+          .get(`${baseURL}plants/${user}`, {
+            headers: { Authorization: `Bearer ${res}` },
+          })
+          .then((res) => {
+            setPlants(res.data);
+          })
+          .catch((error) => {
+            console.log(`Error message: ${error}`);
+          });
+      });
 
-    return () => {
-      setPlants([]);
-    };
-  }, []);
+      return () => {
+        setPlants([]);
+      };
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
@@ -51,7 +53,7 @@ const PlantContainer = (props) => {
       <View style={styles.container}>
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={plants}
+          data={plants.reverse()}
           renderItem={({ item }) => (
             <PlantList
               navigation={props.navigation}
