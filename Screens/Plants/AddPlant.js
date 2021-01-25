@@ -94,6 +94,7 @@ const AddPlant = (props) => {
         />
         <View style={styles.container}>
           <DatePicker
+            style={styles.datepicker}
             value={pottyChange}
             defaultDate={new Date(Date.now())}
             minimumDate={new Date(Date.now())}
@@ -140,6 +141,14 @@ const styles = StyleSheet.create({
     borderColor: "#84A98C",
     fontSize: 15,
     color: "#CAD2C5",
+  },
+  datepicker: {
+    backgroundColor: "#fafafa",
+    position: "absolute",
+    width: 400,
+    bottom: 370,
+    left: 50,
+    right: 100,
   },
   notes: {
     width: "80%",
