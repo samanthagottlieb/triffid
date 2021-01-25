@@ -11,9 +11,12 @@ const plantSchema = new Schema(
     },
     nickname: { type: String, required: true },
     type: { type: String, required: true },
+    lastWatered: { type: Date, required: false },
     wateringFrequency: { type: Number, required: false },
     pottyChange: { type: Date, required: false },
+    image: { data: Buffer, contentType: String, required: false },
     notes: { type: String, required: false },
+    dead: { type: Boolean, required: false},
   },
   {
     timestamps: true,
