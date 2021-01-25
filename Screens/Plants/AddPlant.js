@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
-import { Item, Picker, Textarea } from "native-base";
+import { Item, Picker, Textarea, DatePicker } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
@@ -19,7 +19,8 @@ const AddPlant = (props) => {
   const [nickname, setNickname] = useState();
   const [type, setType] = useState();
   const [wateringFrequency, setWateringFrequency] = useState();
-  const [pottyChange, setPottyChange] = useState();
+  const [pottyChange, setPottyChange] = useState(new Date(1598051730000));
+
   const [notes, setNotes] = useState();
   const context = useContext(AuthGlobal);
   // const user = context.stateUser.user.userId;
@@ -91,6 +92,25 @@ const AddPlant = (props) => {
           keyboardType={"numeric"}
           onChangeText={(text) => setWateringFrequency(text)}
         />
+        <View style={styles.container}>
+          <DatePicker
+            style={styles.datepicker}
+            value={pottyChange}
+            defaultDate={new Date(Date.now())}
+            minimumDate={new Date(Date.now())}
+            maximumDate={new Date(Date.now())}
+            locale={"en"}
+            timeZoneOffsetInMinutes={undefined}
+            modalTransparent={false}
+            animationType={"fade"}
+            androidMode={"default"}
+            placeHolderText="Select Date of Last Potty Change"
+            textStyle={{ color: "green" }}
+            placeHolderTextStyle={{ color: "#d3d3d3" }}
+            onDateChange={(date) => setPottyChange(date)}
+            disabled={false}
+          />
+        </View>
         <Textarea
           style={styles.notes}
           rowSpan={8}
@@ -121,6 +141,14 @@ const styles = StyleSheet.create({
     borderColor: "#84A98C",
     fontSize: 15,
     color: "#CAD2C5",
+  },
+  datepicker: {
+    backgroundColor: "#fafafa",
+    position: "absolute",
+    width: 400,
+    bottom: 370,
+    left: 50,
+    right: 100,
   },
   notes: {
     width: "80%",
