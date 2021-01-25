@@ -1,4 +1,4 @@
-const { User } = require("../models/user.model");
+const User = require("../models/user.model");
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -40,7 +40,7 @@ router.post("/add", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
+  let user = await User.findOne({ email: req.body.email });
   const secret = process.env.secret;
 
   if (!user) {

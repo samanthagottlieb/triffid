@@ -16,7 +16,7 @@ const plantSchema = new Schema(
     pottyChange: { type: Date, required: false },
     image: { data: Buffer, contentType: String, required: false },
     notes: { type: String, required: false },
-    dead: { type: Boolean, required: false},
+    dead: { type: Boolean, required: false },
   },
   {
     timestamps: true,
