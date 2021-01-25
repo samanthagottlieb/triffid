@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
-import { Item, Picker, Textarea } from "native-base";
+import { Item, Picker, Textarea, DatePicker } from "native-base";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
 import GreenButton from "../../Components/GreenButton";
@@ -108,8 +108,25 @@ const EditPlant = (props) => {
         placeholder={"Update Watering Frequency"}
         name={"wateringFrequency"}
         keyboardType={"numeric"}
-        onChangeText={(text) => setWateringFrequency(text)}
+        onChange={(text) => setWateringFrequency(text)}
       />
+      <View style={styles.container}>
+        <DatePicker
+          style={styles.datepicker}
+          value={pottyChange}
+          defaultDate={new Date(Date.now())}
+          maximumDate={new Date(Date.now())}
+          locale={"en"}
+          timeZoneOffsetInMinutes={undefined}
+          modalTransparent={false}
+          animationType={"fade"}
+          androidMode={"default"}
+          placeHolderText="Select Date of Last Potty Change"
+          placeHolderTextStyle={{ color: "#d3d3d3" }}
+          onDateChange={(date) => setPottyChange(date)}
+          disabled={false}
+        />
+      </View>
       <Textarea
         style={styles.notes}
         rowSpan={8}

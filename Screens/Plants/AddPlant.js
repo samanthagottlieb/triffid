@@ -18,8 +18,9 @@ const PlantTypes = require("../../assets/data/PlantTypes.json");
 const AddPlant = (props) => {
   const [nickname, setNickname] = useState();
   const [type, setType] = useState();
+  const [lastWatered, setLastWatered] = useState(new Date());
   const [wateringFrequency, setWateringFrequency] = useState();
-  const [pottyChange, setPottyChange] = useState(new Date(1598051730000));
+  const [pottyChange, setPottyChange] = useState(new Date());
 
   const [notes, setNotes] = useState();
   const context = useContext(AuthGlobal);
@@ -30,6 +31,7 @@ const AddPlant = (props) => {
       userid: context.stateUser.user.userId,
       nickname: nickname,
       type: type,
+      lastWatered: lastWatered,
       wateringFrequency: wateringFrequency,
       pottyChange: pottyChange,
       notes: notes,
@@ -95,9 +97,25 @@ const AddPlant = (props) => {
         <View style={styles.container}>
           <DatePicker
             style={styles.datepicker}
+            value={lastWatered}
+            defaultDate={new Date(Date.now())}
+            maximumDate={new Date(Date.now())}
+            locale={"en"}
+            timeZoneOffsetInMinutes={undefined}
+            modalTransparent={false}
+            animationType={"fade"}
+            androidMode={"default"}
+            placeHolderText="Select Date of Last Watering"
+            placeHolderTextStyle={{ color: "#d3d3d3" }}
+            onDateChange={(date) => setLastWatered(date)}
+            disabled={false}
+          />
+        </View>
+        <View style={styles.container}>
+          <DatePicker
+            style={styles.datepicker}
             value={pottyChange}
             defaultDate={new Date(Date.now())}
-            minimumDate={new Date(Date.now())}
             maximumDate={new Date(Date.now())}
             locale={"en"}
             timeZoneOffsetInMinutes={undefined}
@@ -105,7 +123,6 @@ const AddPlant = (props) => {
             animationType={"fade"}
             androidMode={"default"}
             placeHolderText="Select Date of Last Potty Change"
-            textStyle={{ color: "green" }}
             placeHolderTextStyle={{ color: "#d3d3d3" }}
             onDateChange={(date) => setPottyChange(date)}
             disabled={false}
