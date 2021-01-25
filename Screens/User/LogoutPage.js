@@ -6,6 +6,7 @@ import { logoutUser } from "../../Context/actions/Auth.actions";
 import SecondaryGreenButton from "../../Components/SecondaryGreenButton";
 
 const LogoutPage = () => {
+  const context = useContext(AuthGlobal);
   return (
       <View>
          <SecondaryGreenButton 
