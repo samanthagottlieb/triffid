@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { Item, Picker, Textarea } from "native-base";
 import FormContainer from "../../Shared/Forms/FormContainer";
@@ -9,6 +9,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
+import AuthGlobal from "../../Context/store/AuthGlobal";
 
 
 const PlantTypes = require("../../assets/data/PlantTypes.json");
@@ -24,7 +25,9 @@ const EditPlant = (props) => {
     props.route.params.item.setPottyChange
   );
   const [notes, setNotes] = useState(props.route.params.item.notes);
-
+  
+  const context = useContext(AuthGlobal);
+  const user = context.stateUser.user.userId;
   const handleDelete = () => {
       AsyncStorage.getItem("jwt").then((res) => {
         axios
@@ -40,6 +43,30 @@ const EditPlant = (props) => {
           });
       });
   };
+
+  const handleUpdate = () => {
+    const updatedPlant = {
+      userid: context.stateUser.user.userId,
+      nickname: nickname,
+      type: type,
+      wateringFrequency: wateringFrequency,
+      pottyChange: pottyChange,
+      notes: notes,
+    };
+    AsyncStorage.getItem("jwt").then((res) => {
+      axios
+        .post(`${baseURL}plants/update/${props.route.params.item_id}`, updatedPlant, {
+          headers: { Authorization: `Bearer ${res}` },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .then(props.navigation.navigate("Plants"))
+        .catch((error) => {
+          console.log(`Error message: ${error}`);
+        });
+    });
+};
 
   return (
     <FormContainer
@@ -85,7 +112,7 @@ const EditPlant = (props) => {
         onChangeText={(text) => setNotes(text)}
       />
       <View style={styles.buttons}>
-        <GreenButton text={`Update`} />
+        <GreenButton text={`Update`} onPress={ () => handleUpdate() }/>
         <SecondaryGreenButton text={`Delete`} onPress={ () => handleDelete() }/>
       </View>
     </FormContainer>
