@@ -26,5 +26,4 @@ userSchema.set("toJSON", {
 });
 // Corrected formatting of the virtuals so that it returns 'id' correctly.
 
-exports.User = mongoose.model("User", userSchema);
-exports.userSchema = userSchema;
+module.exports = User = mongoose.model("User", userSchema);
