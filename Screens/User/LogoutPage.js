@@ -8,7 +8,7 @@ import SecondaryGreenButton from "../../Components/SecondaryGreenButton";
 const LogoutPage = () => {
   const context = useContext(AuthGlobal);
   return (
-      <View>
+      <View style={ styles.logoutButtonSection } >
          <SecondaryGreenButton 
             text={"Log Out"} 
             onPress={() => [
@@ -28,7 +28,14 @@ const styles = StyleSheet.create({
   middleText: {
     marginBottom: 20,
     alignSelf: "center",
-  },
+  }, 
+
+  logoutButtonSection: {
+     width: '100%',
+     height: '30%',
+     justifyContent: 'center',
+     alignItems: 'center'
+  }
 });
 
 export default LogoutPage;
