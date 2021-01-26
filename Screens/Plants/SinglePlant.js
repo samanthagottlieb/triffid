@@ -30,6 +30,21 @@ const SinglePlant = (props) => {
   const context = useContext(AuthGlobal);
   const user = context.stateUser.user.userId;
 
+  useEffect(() => {
+    const today = Date.now();
+    const lastWateredInSeconds = Date.parse(lastWatered);
+    if (lastWateredInSeconds + wateringFrequency * 86400000 > today) { 
+      Toast.show({
+        position: 'bottom',
+        bottomOffset: 200,
+        type: "info",
+        text1: "I'm thirsty!",
+        text2: "Please water me 🥵",
+        autoHide: false,
+      }) 
+    }
+  }, [])
+
   const handleSubmit = () => {
     setLastWatered(new Date());
     const updateLastWatered = {
@@ -41,7 +56,6 @@ const SinglePlant = (props) => {
       type: type,
     };
     AsyncStorage.getItem("jwt").then((res) => {
-      console.log(updateLastWatered);
       axios
         .post(
           `${baseURL}plants/update/${props.route.params.item._id}`,
@@ -52,7 +66,7 @@ const SinglePlant = (props) => {
         )
         .then((response) => {
           Toast.show({
-              topOffset: 60,
+              topOffset: 376,
               type: "success",
               text1: "Thirst quenched! 💦",
           })
@@ -77,7 +91,9 @@ const SinglePlant = (props) => {
           <WaterButton onPress={() => handleSubmit()} />
           <Text style={styles.attribute}>{item.type}</Text>
           <Text style={styles.attribute}>
-            Watering Frequency: Every {item.wateringFrequency} days
+            Watering Frequency: Every{" "}
+            {item.wateringFrequency === 1 ? "day" 
+            : `${wateringFrequency} days`}
           </Text>
           <Text style={styles.attribute}>
             Last Watered:{" "}
