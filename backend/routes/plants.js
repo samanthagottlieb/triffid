@@ -1,6 +1,9 @@
 const { User } = require("../models/user.model");
 const router = require("express").Router();
-let Plant = require("../models/plant.model");
+const fetch = require('node-fetch');
+let Plant = require("../models/plant.model")
+
+const token = process.env.token
 
 router.get("/", async (req, res) => {
   // let filter = User.findById(req.body.id);
@@ -13,6 +16,14 @@ router.get("/", async (req, res) => {
     res.status(500).json({ success: false });
   }
   res.send(plantList);
+});
+
+router.route("/discover").get(async (req, res) => {
+  const searchFor = req.params.search
+  const response = await fetch(`https://trefle.io/api/v1/plants?token=${token}`);
+  const json = await response.json();
+  const plantsInfo = json.data;
+  res.json(plantsInfo);
 });
 
 router.post("/add", async (req, res) => {
@@ -62,5 +73,6 @@ router.route("/update/:id").post((req, res) => {
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
+
 
 module.exports = router;
