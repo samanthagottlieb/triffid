@@ -10,6 +10,7 @@ import AuthGlobal from "../../Context/store/AuthGlobal";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AsyncStorage from "@react-native-community/async-storage";
+import Toast from "react-native-toast-message";
 
 // const plantTypes =
 
@@ -47,7 +48,11 @@ const AddPlant = (props) => {
             headers: { Authorization: `Bearer ${res}` },
           })
           .then((response) => {
-            console.log(response);
+            Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: `${nickname} was added to your terrarium`
+            })
           })
           .then(
             setTimeout(() => {
@@ -124,12 +129,7 @@ const AddPlant = (props) => {
         <GreenButton
           style={styles.buttons}
           text="Add plant"
-          onPress={() => handleSubmit(),
-            Toast.show({
-              topOffset: 60,
-              type: "success",
-              text1: `${plant.nickname} was added to your terrarium`
-            })}
+          onPress={() => handleSubmit()}
         />
       </FormContainer>
     </KeyboardAwareScrollView>
