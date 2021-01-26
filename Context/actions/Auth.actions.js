@@ -35,7 +35,7 @@ export const loginUser = (user, dispatch) => {
         Toast.show({
               topOffset: 60,
               type: "error",
-              text1: "Something went wrong",
+              text1: "Something went wrong 🙅",
               text2: "Please try again"
             })
         logoutUser(dispatch)
@@ -58,6 +58,12 @@ export const getUserProfile = (id) => {
 export const logoutUser = (dispatch) => {
     AsyncStorage.removeItem("jwt");
     dispatch(setCurrentUser({}))
+    Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: "Bye bye 👋",
+              text2: "You've been logged out"
+            })
 }
 
 export const setCurrentUser = (decoded, user) => {
