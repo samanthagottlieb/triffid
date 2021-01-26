@@ -14,6 +14,7 @@ import baseURL from "../../assets/common/baseUrl";
 import GreenButton from "../../Components/GreenButton";
 import WaterButton from "../../Components/WaterButton";
 import AuthGlobal from "../../Context/store/AuthGlobal";
+import Toast from "react-native-toast-message";
 
 var { width } = Dimensions.get("window");
 
@@ -50,7 +51,11 @@ const SinglePlant = (props) => {
           }
         )
         .then((response) => {
-          console.log(response);
+          Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: "Thirst quenched! 💦",
+          })
         })
         .catch((error) => {
           console.log(`Error message: ${error}`);

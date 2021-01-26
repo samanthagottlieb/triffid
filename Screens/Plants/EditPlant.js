@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AuthGlobal from "../../Context/store/AuthGlobal";
+import Toast from "react-native-toast-message";
 
 const PlantTypes = require("../../assets/data/PlantTypes.json");
 
@@ -31,7 +32,11 @@ const EditPlant = (props) => {
           headers: { Authorization: `Bearer ${res}` },
         })
         .then((response) => {
-          console.log(response);
+          Toast.show({
+              topOffset: 60,
+              type: "info",
+              text1: `${nickname} was deleted 😭`
+            })
         })
         .then(props.navigation.navigate("Plants"))
         .catch((error) => {
@@ -59,7 +64,11 @@ const EditPlant = (props) => {
           }
         )
         .then((response) => {
-          console.log(response);
+          Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: `${nickname} was updated 🧑‍🌾`
+            })
         })
         .then(
           setTimeout(() => {
@@ -116,18 +125,8 @@ const EditPlant = (props) => {
         onChangeText={(text) => setNotes(text)}
       />
       <View style={styles.buttons}>
-        <GreenButton text={`Update`} onPress={() => handleUpdate(),
-          Toast.show({
-              topOffset: 60,
-              type: "success",
-              text1: `${updatedPlant.nickname} was updated`
-            })} />
-        <SecondaryGreenButton text={`Delete`} onPress={() => handleDelete(),
-          Toast.show({
-              topOffset: 60,
-              type: "info",
-              text1: `${updatedPlant.nickname} was deleted`
-            })} />
+        <GreenButton text={`Update`} onPress={() => handleUpdate()} />
+        <SecondaryGreenButton text={`Delete`} onPress={() => handleDelete()} />
       </View>
     </FormContainer>
   );
