@@ -11,6 +11,6 @@ web-build/
 backend/.env
 backend/coverage/
 backend/node_modules/
-
+backend/public/
 # macOS
 .DS_Store

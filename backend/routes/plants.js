@@ -6,20 +6,19 @@ let Plant = require("../models/plant.model");
 // Defined storage for multer image upload
 const storage = multer.diskStorage({
   // File destination
-  destination: function (request, file, callback) {
-    callback(null, "./public/uploads/images");
+  destination: function (req, file, cb) {
+    cb(null, "./public/uploads/images");
   },
   // Add back the file extensions that multer strips off
-  filename: function (request, file, callback) {
-    callback(null, Date.now() * file.originalname);
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
   },
 });
 
-// Upload parameters for multer.
 const upload = multer({
   storage: storage,
   limits: {
-    fieldSize: 1024 * 1024 * 3,
+    fileSize: 1024 * 1024 * 25,
   },
 });
 
@@ -36,7 +35,8 @@ router.get("/", async (req, res) => {
   res.send(plantList);
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", upload.single("selectImage"), async (req, res, next) => {
+  console.log(req);
   let newPlant = new Plant({
     userid: req.body.userid,
     nickname: req.body.nickname,
@@ -45,6 +45,7 @@ router.post("/add", async (req, res) => {
     wateringFrequency: req.body.wateringFrequency,
     pottyChange: req.body.pottyChange,
     notes: req.body.notes,
+    image: req.file.filename,
   });
   newPlant = await newPlant.save();
 

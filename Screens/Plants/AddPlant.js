@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { Item, Picker, Textarea, DatePicker } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormContainer from "../../Shared/Forms/FormContainer";
@@ -11,6 +18,7 @@ import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AsyncStorage from "@react-native-community/async-storage";
 import Toast from "react-native-toast-message";
+import * as ImagePicker from "expo-image-picker";
 
 // const plantTypes =
 
@@ -22,6 +30,7 @@ const AddPlant = (props) => {
   const [lastWatered, setLastWatered] = useState(new Date());
   const [wateringFrequency, setWateringFrequency] = useState();
   const [notes, setNotes] = useState();
+  const [selectImage, setSelectImage] = useState(null);
   const context = useContext(AuthGlobal);
   // const user = context.stateUser.user.userId;
 
@@ -30,29 +39,59 @@ const AddPlant = (props) => {
     setLastWatered(currentDate);
   };
 
-  const handleSubmit = () => {
-    const plant = {
-      userid: context.stateUser.user.userId,
-      nickname: nickname,
-      type: type,
-      lastWatered: lastWatered,
-      wateringFrequency: wateringFrequency,
-      notes: notes,
+  let openImage = async () => {
+    let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permission.granted === false) {
+      return;
+    }
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (result.cancelled === true) {
+      return;
+    }
+    const img = {
+      uri: result.uri,
+      type: result.type,
+      name:
+        result.fileName || result.uri.substr(result.uri.lastIndexOf("/") + 1),
     };
+    setSelectImage(img);
+
+    console.log(selectImage);
+  };
+
+  const handleSubmit = () => {
+    const plantImage = new FormData();
+    plantImage.append("selectImage", "selectImage");
+    plantImage.append("selectImage", selectImage);
+    plantImage.append("userid", context.stateUser.user.userId);
+    plantImage.append("nickname", nickname);
+    plantImage.append("type", type);
+    plantImage.append("lastWatered", lastWatered);
+    plantImage.append("wateringFrequency", wateringFrequency);
+    plantImage.append("notes", notes);
+
     if (nickname === "" || type === "") {
       setError("Please fill in the plant information");
     } else {
       AsyncStorage.getItem("jwt").then((res) => {
         axios
-          .post(`${baseURL}plants/add`, plant, {
-            headers: { Authorization: `Bearer ${res}` },
+          .post(`${baseURL}plants/add`, plantImage, {
+            headers: {
+              "content-type": "multipart/form-data",
+              Authorization: `Bearer ${res}`,
+            },
           })
           .then((response) => {
             Toast.show({
               topOffset: 60,
               type: "success",
-              text1: `${nickname} was added to your terrarium`
-            })
+              text1: `${nickname} was added to your terrarium`,
+            });
           })
           .then(
             setTimeout(() => {
@@ -79,6 +118,15 @@ const AddPlant = (props) => {
           value={nickname}
           onChangeText={(text) => setNickname(text)}
         />
+        <View style={styles.container}>
+          <TouchableOpacity onPress={openImage} style={styles.button}>
+            {selectImage !== null ? (
+              <Text>Image Selected</Text>
+            ) : (
+              <Text>Please Select an Image</Text>
+            )}
+          </TouchableOpacity>
+        </View>
         <View style={styles.container}>
           <Item picker>
             <Picker
