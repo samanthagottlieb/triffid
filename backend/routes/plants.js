@@ -26,6 +26,14 @@ router.route("/discover").get(async (req, res) => {
   res.json(plantsInfo);
 });
 
+router.route("/discover/:search").get(async (req, res) => {
+  const searchFor = req.params.search
+  const response = await fetch(`https://trefle.io/api/v1/plants/search?token=${TOKEN}&q=${searchFor}`);
+  const json = await response.json();
+  const plantsInfo = json.data;
+  res.json(plantsInfo);
+});
+
 router.post("/add", async (req, res) => {
   let newPlant = new Plant({
     userid: req.body.userid,
