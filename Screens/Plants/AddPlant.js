@@ -20,11 +20,14 @@ const AddPlant = (props) => {
   const [type, setType] = useState();
   const [lastWatered, setLastWatered] = useState(new Date());
   const [wateringFrequency, setWateringFrequency] = useState();
-  const [pottyChange, setPottyChange] = useState(new Date());
-
   const [notes, setNotes] = useState();
   const context = useContext(AuthGlobal);
   // const user = context.stateUser.user.userId;
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || lastWatered;
+    setLastWatered(currentDate);
+  };
 
   const handleSubmit = () => {
     const plant = {
@@ -33,7 +36,6 @@ const AddPlant = (props) => {
       type: type,
       lastWatered: lastWatered,
       wateringFrequency: wateringFrequency,
-      pottyChange: pottyChange,
       notes: notes,
     };
     if (nickname === "" || type === "") {
@@ -107,24 +109,7 @@ const AddPlant = (props) => {
             androidMode={"default"}
             placeHolderText="Select Date of Last Watering"
             placeHolderTextStyle={{ color: "#d3d3d3" }}
-            onDateChange={(date) => setLastWatered(date)}
-            disabled={false}
-          />
-        </View>
-        <View style={styles.container}>
-          <DatePicker
-            style={styles.datepicker}
-            value={pottyChange}
-            defaultDate={new Date(Date.now())}
-            maximumDate={new Date(Date.now())}
-            locale={"en"}
-            timeZoneOffsetInMinutes={undefined}
-            modalTransparent={false}
-            animationType={"fade"}
-            androidMode={"default"}
-            placeHolderText="Select Date of Last Potty Change"
-            placeHolderTextStyle={{ color: "#d3d3d3" }}
-            onDateChange={(date) => setPottyChange(date)}
+            onChange={onChange}
             disabled={false}
           />
         </View>
@@ -186,23 +171,3 @@ const styles = StyleSheet.create({
 });
 
 export default AddPlant;
-
-// // Will need to import AsyncStorage to attain the JWT token to authenticate user to give priviladges to visit this page.
-
-// const AddPlantForm = (props) => {
-//   const [nickname, setNickname] = useState();
-//   const [type, setType] = useState();
-//   const [wateringFrequency, setWateringFrequency] = useState();
-//   const [pottyChange, setPottyChange] = useState();
-//   const [notes, setNotes] = useState();
-//   // Will also need some sort of setter here in order to receive the JWT to make the request to our API.
-
-//   return (
-
-// };
-
-// export default AddPlantForm;
-// Date picker for pot change.
-// <View style={styles.container}>
-
-// </View>

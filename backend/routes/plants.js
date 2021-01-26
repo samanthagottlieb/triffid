@@ -20,6 +20,7 @@ router.post("/add", async (req, res) => {
     userid: req.body.userid,
     nickname: req.body.nickname,
     type: req.body.type,
+    lastWatered: req.body.lastWatered,
     wateringFrequency: req.body.wateringFrequency,
     pottyChange: req.body.pottyChange,
     notes: req.body.notes,

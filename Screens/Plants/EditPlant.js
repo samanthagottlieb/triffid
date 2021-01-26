@@ -20,9 +20,6 @@ const EditPlant = (props) => {
   const [wateringFrequency, setWateringFrequency] = useState(
     props.route.params.item.wateringFrequency
   );
-  const [pottyChange, setPottyChange] = useState(
-    props.route.params.item.setPottyChange
-  );
   const [notes, setNotes] = useState(props.route.params.item.notes);
 
   const context = useContext(AuthGlobal);
@@ -49,7 +46,6 @@ const EditPlant = (props) => {
       nickname: nickname,
       type: type,
       wateringFrequency: wateringFrequency,
-      pottyChange: pottyChange,
       notes: notes,
     };
     AsyncStorage.getItem("jwt").then((res) => {
@@ -110,23 +106,6 @@ const EditPlant = (props) => {
         keyboardType={"numeric"}
         onChange={(text) => setWateringFrequency(text)}
       />
-      <View style={styles.container}>
-        <DatePicker
-          style={styles.datepicker}
-          value={pottyChange}
-          defaultDate={new Date(Date.now())}
-          maximumDate={new Date(Date.now())}
-          locale={"en"}
-          timeZoneOffsetInMinutes={undefined}
-          modalTransparent={false}
-          animationType={"fade"}
-          androidMode={"default"}
-          placeHolderText="Select Date of Last Potty Change"
-          placeHolderTextStyle={{ color: "#d3d3d3" }}
-          onDateChange={(date) => setPottyChange(date)}
-          disabled={false}
-        />
-      </View>
       <Textarea
         style={styles.notes}
         rowSpan={8}
@@ -175,23 +154,3 @@ const styles = StyleSheet.create({
 });
 
 export default EditPlant;
-
-// // Will need to import AsyncStorage to attain the JWT token to authenticate user to give priviladges to visit this page.
-
-// const AddPlantForm = (props) => {
-//   const [nickname, setNickname] = useState();
-//   const [type, setType] = useState();
-//   const [wateringFrequency, setWateringFrequency] = useState();
-//   const [pottyChange, setPottyChange] = useState();
-//   const [notes, setNotes] = useState();
-//   // Will also need some sort of setter here in order to receive the JWT to make the request to our API.
-
-//   return (
-
-// };
-
-// export default AddPlantForm;
-// Date picker for pot change.
-// <View style={styles.container}>
-
-// </View>
