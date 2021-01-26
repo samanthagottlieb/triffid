@@ -31,6 +31,7 @@ const AddPlant = (props) => {
   const [wateringFrequency, setWateringFrequency] = useState();
   const [notes, setNotes] = useState();
   const [selectImage, setSelectImage] = useState(null);
+  const [mainImage, setMainImage] = useState();
   const context = useContext(AuthGlobal);
   // const user = context.stateUser.user.userId;
 
@@ -60,8 +61,7 @@ const AddPlant = (props) => {
         result.fileName || result.uri.substr(result.uri.lastIndexOf("/") + 1),
     };
     setSelectImage(img);
-
-    console.log(selectImage);
+    setMainImage(result.uri);
   };
 
   const handleSubmit = () => {
@@ -96,7 +96,7 @@ const AddPlant = (props) => {
           .then(
             setTimeout(() => {
               props.navigation.navigate("Plants");
-            }, 300)
+            }, 500)
           )
           .catch((error) => {
             console.log(`Error message: ${error}`);
@@ -107,26 +107,23 @@ const AddPlant = (props) => {
 
   return (
     <KeyboardAwareScrollView
-      // viewIsInsideTabBar={true}
+      viewIsInsideTabBar={true}
       extraHeight={200}
       enableOnAndroid={true}
     >
       <FormContainer title={"Add a new plant"}>
+        <View style={styles.imageContainer}>
+          <Image style={styles.image} source={{ uri: mainImage }} />
+          <TouchableOpacity onPress={openImage} style={styles.imagePicker}>
+            <Icon style={{ color: "white" }} name="camera" />
+          </TouchableOpacity>
+        </View>
         <Input
           placeholder={"Nickname"}
           name={"Nickname"}
           value={nickname}
           onChangeText={(text) => setNickname(text)}
         />
-        <View style={styles.container}>
-          <TouchableOpacity onPress={openImage} style={styles.button}>
-            {selectImage !== null ? (
-              <Text>Image Selected</Text>
-            ) : (
-              <Text>Please Select an Image</Text>
-            )}
-          </TouchableOpacity>
-        </View>
         <View style={styles.container}>
           <Item picker>
             <Picker
@@ -220,6 +217,31 @@ const styles = StyleSheet.create({
   buttons: {
     height: 115,
     justifyContent: "space-between",
+  },
+  imageContainer: {
+    width: 170,
+    height: 170,
+    borderStyle: "solid",
+    borderWidth: 7,
+    padding: 0,
+    justifyContent: "center",
+    borderRadius: 100,
+    borderColor: "#CAD2C5",
+    elevation: 10,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 100,
+  },
+  imagePicker: {
+    position: "absolute",
+    right: 5,
+    bottom: 5,
+    backgroundColor: "#84A98C",
+    padding: 8,
+    borderRadius: 100,
+    elevation: 20,
   },
 });
 
