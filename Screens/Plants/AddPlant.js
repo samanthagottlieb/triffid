@@ -122,7 +122,12 @@ const AddPlant = (props) => {
         <GreenButton
           style={styles.buttons}
           text="Add plant"
-          onPress={() => handleSubmit()}
+          onPress={() => handleSubmit(),
+            Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: `${plant.nickname} added`
+            })}
         />
       </FormContainer>
     </KeyboardAwareScrollView>
