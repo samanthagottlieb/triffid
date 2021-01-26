@@ -1,6 +1,27 @@
 const { User } = require("../models/user.model");
 const router = require("express").Router();
+const multer = require("multer");
 let Plant = require("../models/plant.model");
+
+// Defined storage for multer image upload
+const storage = multer.diskStorage({
+  // File destination
+  destination: function (request, file, callback) {
+    callback(null, "./public/uploads/images");
+  },
+  // Add back the file extensions that multer strips off
+  filename: function (request, file, callback) {
+    callback(null, Date.now() * file.originalname);
+  },
+});
+
+// Upload parameters for multer.
+const upload = multer({
+  storage: storage,
+  limits: {
+    fieldSize: 1024 * 1024 * 3,
+  },
+});
 
 router.get("/", async (req, res) => {
   // let filter = User.findById(req.body.id);
