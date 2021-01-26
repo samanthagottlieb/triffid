@@ -19,10 +19,10 @@ router.get("/", async (req, res) => {
 });
 
 router.route("/discover").get(async (req, res) => {
-  const searchFor = req.params.search
   const response = await fetch(`https://trefle.io/api/v1/plants?token=${token}`);
   const json = await response.json();
   const plantsInfo = json.data;
+  console.log('called');
   res.json(plantsInfo);
 });
 
