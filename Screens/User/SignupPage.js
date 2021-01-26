@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
+import Toast from "react-native-toast-message";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 
@@ -18,19 +19,30 @@ const SignupPage = ({ navigation }) => {
     };
 
     if (name === "" || email === "" || password === "") {
-      setError("Please fill in your email and password");
+      setError("Please fill in your name, email and password");
     } else {
       axios
         .post(`${baseURL}users/add`, user)
         .then((response) => {
-          console.log(response);
-        })
-        .then(
-          setTimeout(() => {
+          if (response.status == 200) {
+            Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: "Signup successful",
+              text2: "Please login to your account"
+            });
+            setTimeout(() => {
             navigation.navigate("Login");
-          }, 500)
-        )
+            }, 500);
+          }
+        })
         .catch((error) => {
+          Toast.show({
+            topOffset: 60,
+              type: "error",
+              text1: "Something went wrong",
+              text2: "Please try again"
+          });
           console.log(`Error message: ${error}`);
         });
     }

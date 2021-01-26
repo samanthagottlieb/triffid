@@ -116,8 +116,18 @@ const EditPlant = (props) => {
         onChangeText={(text) => setNotes(text)}
       />
       <View style={styles.buttons}>
-        <GreenButton text={`Update`} onPress={() => handleUpdate()} />
-        <SecondaryGreenButton text={`Delete`} onPress={() => handleDelete()} />
+        <GreenButton text={`Update`} onPress={() => handleUpdate(),
+          Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: `${updatedPlant.nickname} was updated`
+            })} />
+        <SecondaryGreenButton text={`Delete`} onPress={() => handleDelete(),
+          Toast.show({
+              topOffset: 60,
+              type: "info",
+              text1: `${updatedPlant.nickname} was deleted`
+            })} />
       </View>
     </FormContainer>
   );
