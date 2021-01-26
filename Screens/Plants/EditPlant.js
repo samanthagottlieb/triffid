@@ -14,14 +14,14 @@ import AuthGlobal from "../../Context/store/AuthGlobal";
 const PlantTypes = require("../../assets/data/PlantTypes.json");
 
 const EditPlant = (props) => {
-  // console.log(props.route.params.item._id)
+  console.log(props.route.params.lastWatered);
   const [nickname, setNickname] = useState(props.route.params.item.nickname);
   const [type, setType] = useState(props.route.params.item.type);
   const [wateringFrequency, setWateringFrequency] = useState(
     props.route.params.item.wateringFrequency
   );
   const [notes, setNotes] = useState(props.route.params.item.notes);
-
+  const lastWatered = props.route.params.lastWatered;
   const context = useContext(AuthGlobal);
   const user = context.stateUser.user.userId;
   const handleDelete = () => {
@@ -46,6 +46,7 @@ const EditPlant = (props) => {
       nickname: nickname,
       type: type,
       wateringFrequency: wateringFrequency,
+      lastWatered: lastWatered,
       notes: notes,
     };
     AsyncStorage.getItem("jwt").then((res) => {
