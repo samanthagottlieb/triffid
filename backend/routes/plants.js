@@ -20,6 +20,7 @@ router.post("/add", async (req, res) => {
     userid: req.body.userid,
     nickname: req.body.nickname,
     type: req.body.type,
+    lastWatered: req.body.lastWatered,
     wateringFrequency: req.body.wateringFrequency,
     pottyChange: req.body.pottyChange,
     notes: req.body.notes,
@@ -51,6 +52,7 @@ router.route("/update/:id").post((req, res) => {
       plant.userid = req.body.userid;
       plant.nickname = req.body.nickname;
       plant.type = req.body.type;
+      plant.lastWatered = req.body.lastWatered;
       plant.wateringFrequency = req.body.wateringFrequency;
       plant.pottyChange = req.body.pottyChange;
       plant.notes = req.body.notes;

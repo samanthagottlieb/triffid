@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StyleSheet,
   View,
@@ -8,12 +8,56 @@ import {
   Text,
   ScrollView,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from "axios";
+import baseURL from "../../assets/common/baseUrl";
 import GreenButton from "../../Components/GreenButton";
+import WaterButton from "../../Components/WaterButton";
+import AuthGlobal from "../../Context/store/AuthGlobal";
 
 var { width } = Dimensions.get("window");
 
 const SinglePlant = (props) => {
   const [item, setItem] = useState(props.route.params.item);
+  const nickname = props.route.params.item.nickname;
+  const type = props.route.params.item.type;
+  const [lastWatered, setLastWatered] = useState(
+    props.route.params.item.lastWatered
+  );
+  const wateringFrequency = props.route.params.item.wateringFrequency;
+  const notes = props.route.params.item.notes;
+  const context = useContext(AuthGlobal);
+  const user = context.stateUser.user.userId;
+
+  const handleSubmit = () => {
+    setLastWatered(new Date());
+    const updateLastWatered = {
+      userid: user,
+      lastWatered: new Date(),
+      wateringFrequency: wateringFrequency,
+      notes: notes,
+      nickname: nickname,
+      type: type,
+    };
+    AsyncStorage.getItem("jwt").then((res) => {
+      console.log(updateLastWatered);
+      axios
+        .post(
+          `${baseURL}plants/update/${props.route.params.item._id}`,
+          updateLastWatered,
+          {
+            headers: { Authorization: `Bearer ${res}` },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(`Error message: ${error}`);
+        });
+    });
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -25,15 +69,16 @@ const SinglePlant = (props) => {
         />
         <View style={styles.lowerContainer}>
           <Text style={styles.nickname}>{item.nickname}</Text>
+          <WaterButton onPress={() => handleSubmit()} />
           <Text style={styles.attribute}>{item.type}</Text>
           <Text style={styles.attribute}>
-            Watering Frequency: {item.wateringFrequency}
+            Watering Frequency: Every {item.wateringFrequency} days
           </Text>
           <Text style={styles.attribute}>
-            Potty Change:{" "}
-            {item.pottyChange === undefined
+            Last Watered:{" "}
+            {lastWatered === undefined
               ? "Information not available"
-              : item.pottyChange.slice(0, 10)}
+              : lastWatered.toString().slice(0, 10)}
           </Text>
           <Text style={styles.notes}>{item.notes}</Text>
         </View>
@@ -41,7 +86,10 @@ const SinglePlant = (props) => {
           <GreenButton
             text="Update"
             onPress={() =>
-              props.navigation.navigate("Edit Plant", { item: item })
+              props.navigation.navigate("Edit Plant", {
+                item: item,
+                lastWatered: lastWatered,
+              })
             }
           />
         </View>
