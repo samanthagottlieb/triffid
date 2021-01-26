@@ -126,7 +126,7 @@ const AddPlant = (props) => {
             Toast.show({
               topOffset: 60,
               type: "success",
-              text1: `${plant.nickname} added`
+              text1: `${plant.nickname} was added to your terrarium`
             })}
         />
       </FormContainer>
