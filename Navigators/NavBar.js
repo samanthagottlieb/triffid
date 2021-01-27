@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 
 // Stacks
 import PlantNavigator from "./PlantNavigator";
+import DiscoverNavigator from "./DiscoverNavigator";
 import LogoutPage from "../Screens/User/LogoutPage";
 
 const Tab = createBottomTabNavigator();
@@ -29,7 +30,7 @@ function NavBar() {
       />
       <Tab.Screen
         name="Discover"
-        component={PlantNavigator}
+        component={DiscoverNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="search" color={color} size={30} />
@@ -45,10 +46,10 @@ function NavBar() {
           ),
         }}
       />
-    </Tab.Navigator>  
+    </Tab.Navigator>
   );
-};
+}
 
 export default function NavBarNavigator() {
-  return <NavBar />
-};
+  return <NavBar />;
+}
