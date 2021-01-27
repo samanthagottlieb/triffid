@@ -1,11 +1,9 @@
-// import React, { useState, useEffect, useContext } from "react";
-// import { View, Text, Button, StyleSheet } from "react-native";
-
 import React, { Component } from "react";
-import { FlatList, StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import { FlatList, StyleSheet, View, Image, Dimensions } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import baseURL from "../../assets/common/baseUrl";
 import axios from "axios";
+import { Container, Header, Icon, Item, Input, Text } from "native-base";
 
 // PlantCard
 var { width } = Dimensions.get("window");
@@ -85,6 +83,17 @@ export default class SearchPlants extends Component {
 
     render() {
         return (
+          <Container>
+                <Header searchBar rounded>
+                  <Item>
+                    <Icon name="ios-search" />
+                    <Input
+                      placeholder="Search"
+                      // onFocus={openList}
+                      // onChangeText={(text) => searchProduct(text)}
+                    />
+                  </Item>
+                </Header>
             <FlatList
             data={this.state.data}
             keyExtractor={(x, i) => i}
@@ -108,8 +117,9 @@ export default class SearchPlants extends Component {
                 </View>
             }
             />
+            </Container>
         );
-    }
+    };
 };
 
 
