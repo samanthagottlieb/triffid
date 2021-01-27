@@ -52,10 +52,10 @@ const SinglePlant = (props) => {
         )
         .then((response) => {
           Toast.show({
-              topOffset: 60,
-              type: "success",
-              text1: "Thirst quenched! 💦",
-          })
+            topOffset: 60,
+            type: "success",
+            text1: "Thirst quenched! 💦",
+          });
         })
         .catch((error) => {
           console.log(`Error message: ${error}`);
@@ -81,7 +81,7 @@ const SinglePlant = (props) => {
           </Text>
           <Text style={styles.attribute}>
             Last Watered:{" "}
-            {lastWatered === undefined
+            {lastWatered === undefined || lastWatered === null
               ? "Information not available"
               : lastWatered.toString().slice(0, 10)}
           </Text>

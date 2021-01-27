@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(authJwt());
 app.use(errorHandler);
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {

@@ -1,13 +1,39 @@
 const { User } = require("../models/user.model");
 const router = require("express").Router();
+const multer = require("multer");
+let Plant = require("../models/plant.model");
 const fetch = require('node-fetch');
-let Plant = require("../models/plant.model")
 
 const token = process.env.token
 
+const FILE_TYPE_MAP = {
+  "image/png": "png",
+  "image/jpeg": "jpeg",
+  "image/jpg": "jpg",
+};
+
+// Defined storage for multer image upload
+const storage = multer.diskStorage({
+  // File destination
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/");
+  },
+  // Add back the file extensions that multer strips off
+  filename: function (req, file, cb) {
+    const fileName = file.originalname;
+    const extension = FILE_TYPE_MAP[file.mimetype];
+    cb(null, `${fileName}-${Date.now()}.${extension}`);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 25,
+  },
+});
+
 router.get("/", async (req, res) => {
-  // let filter = User.findById(req.body.id);
-  // const plantList = await Plant.find(filter)
   const plantList = await Plant.find().select(
     "nickname type wateringFrequency pottyChange notes -_id"
   );
@@ -34,15 +60,17 @@ router.route("/discover/:search").get(async (req, res) => {
   res.json(plantsInfo);
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", upload.single("selectImage"), async (req, res, next) => {
+  const fileName = req.file.filename;
+  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
   let newPlant = new Plant({
     userid: req.body.userid,
     nickname: req.body.nickname,
     type: req.body.type,
     lastWatered: req.body.lastWatered,
     wateringFrequency: req.body.wateringFrequency,
-    pottyChange: req.body.pottyChange,
     notes: req.body.notes,
+    image: `${basePath}${fileName}`,
   });
   newPlant = await newPlant.save();
 

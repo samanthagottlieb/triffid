@@ -6,7 +6,11 @@ function authJwt() {
     secret,
     algorithms: ["HS256"],
   }).unless({
-    path: ["/users/login", "/users/add", "/plants"],
+    path: [
+      "/users/login",
+      "/users/add",
+      { url: /\/public\/uploads(.*)/, methods: ["GET", "OPTIONS"] },
+    ],
   });
 }
 
