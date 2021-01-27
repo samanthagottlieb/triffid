@@ -45,10 +45,10 @@ function NavBar() {
           ),
         }}
       />
-    </Tab.Navigator>  
+    </Tab.Navigator>
   );
-};
+}
 
 export default function NavBarNavigator() {
-  return <NavBar />
-};
+  return <NavBar />;
+}
