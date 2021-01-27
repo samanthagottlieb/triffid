@@ -10,6 +10,7 @@ const Input = (props) => {
       id={props.id}
       value={props.value}
       autoCorrect={props.autoCorrect}
+      autoCapitalize={props.autoCapitalize}
       onChangeText={props.onChangeText}
       onFocus={props.onFocus}
       secureTextEntry={props.secureTextEntry}

@@ -33,6 +33,8 @@ const LoginPage = ({ navigation }) => {
         placeholder={"Email"}
         id={"email"}
         name={"email"}
+        autoCorrect={false}
+        autoCapitalize="none"
         value={email.value}
         onChangeText={(text) => setEmail(text.toLowerCase())}
       />
