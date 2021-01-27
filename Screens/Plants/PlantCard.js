@@ -22,9 +22,7 @@ const PlantCard = (props) => {
       <Image
         style={styles.image}
         resizeMode="contain"
-        source={{
-          uri: image ? image : "http://localhost:5000/public/uploads/Plant.jpg",
-        }}
+        source={{ uri: image }}
         nativeID="plantImage"
       />
       <View />

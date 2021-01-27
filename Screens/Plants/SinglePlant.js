@@ -33,17 +33,17 @@ const SinglePlant = (props) => {
   useEffect(() => {
     const today = Date.now();
     const lastWateredInSeconds = Date.parse(lastWatered);
-    if (lastWateredInSeconds + wateringFrequency * 86400000 > today) { 
+    if (lastWateredInSeconds + wateringFrequency * 86400000 < today) {
       Toast.show({
-        position: 'bottom',
+        position: "bottom",
         bottomOffset: 200,
         type: "info",
         text1: "I'm thirsty!",
         text2: "Please water me 🥵",
         autoHide: false,
-      }) 
+      });
     }
-  }, [])
+  }, []);
 
   const handleSubmit = () => {
     setLastWatered(new Date());
@@ -66,10 +66,10 @@ const SinglePlant = (props) => {
         )
         .then((response) => {
           Toast.show({
-              topOffset: 376,
-              type: "success",
-              text1: "Thirst quenched! 💦",
-          })
+            topOffset: 376,
+            type: "success",
+            text1: "Thirst quenched! 💦",
+          });
         })
         .catch((error) => {
           console.log(`Error message: ${error}`);
@@ -92,8 +92,7 @@ const SinglePlant = (props) => {
           <Text style={styles.attribute}>{item.type}</Text>
           <Text style={styles.attribute}>
             Watering Frequency: Every{" "}
-            {item.wateringFrequency === 1 ? "day" 
-            : `${wateringFrequency} days`}
+            {item.wateringFrequency === 1 ? "day" : `${wateringFrequency} days`}
           </Text>
           <Text style={styles.attribute}>
             Last Watered:{" "}
