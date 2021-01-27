@@ -29,19 +29,19 @@ const SignupPage = ({ navigation }) => {
               topOffset: 60,
               type: "success",
               text1: "Signup successful",
-              text2: "Please login to your account"
+              text2: "Please login to your account",
             });
             setTimeout(() => {
-            navigation.navigate("Login");
+              navigation.navigate("Login");
             }, 500);
           }
         })
         .catch((error) => {
           Toast.show({
             topOffset: 60,
-              type: "error",
-              text1: "Something went wrong",
-              text2: "Please try again"
+            type: "error",
+            text1: "Something went wrong",
+            text2: "Please try again",
           });
           console.log(`Error message: ${error}`);
         });
@@ -55,7 +55,7 @@ const SignupPage = ({ navigation }) => {
         placeholder={"Name"}
         id={"name"}
         name={"name"}
-        value={name}
+        value={name.value}
         onChangeText={(text) => setName(text)}
       />
       <Input
@@ -63,7 +63,7 @@ const SignupPage = ({ navigation }) => {
         placeholder={"Email"}
         id={"email"}
         name={"email"}
-        value={email}
+        value={email.value}
         onChangeText={(text) => setEmail(text.toLowerCase())}
       />
       <Input
@@ -72,7 +72,7 @@ const SignupPage = ({ navigation }) => {
         id={"Password"}
         secureTextEntry={true}
         name={"password"}
-        value={password}
+        value={password.value}
         onChangeText={(text) => setPassword(text)}
       />
       <View style={styles.buttonGroup}>
