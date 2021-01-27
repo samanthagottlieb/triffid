@@ -23,7 +23,7 @@ const AddPlant = (props) => {
   const [type, setType] = useState();
   const [lastWatered, setLastWatered] = useState(new Date());
   const [wateringFrequency, setWateringFrequency] = useState(7);
-  const [notes, setNotes] = useState();
+  const [notes, setNotes] = useState("");
   const [selectImage, setSelectImage] = useState(null);
   const [mainImage, setMainImage] = useState();
   const context = useContext(AuthGlobal);
@@ -55,12 +55,14 @@ const AddPlant = (props) => {
   // Add Button event handler
   const handleSubmit = () => {
     let plantImage = new FormData();
-    const newImageUri = "file:///" + selectImage.split("file:/").join("");
-    plantImage.append("selectImage", {
-      uri: newImageUri,
-      type: mime.getType(newImageUri),
-      name: newImageUri.split("/").pop(),
-    });
+    if (selectImage) {
+      const newImageUri = "file:///" + selectImage.split("file:/").join("");
+      plantImage.append("selectImage", {
+        uri: newImageUri,
+        type: mime.getType(newImageUri),
+        name: newImageUri.split("/").pop(),
+      });
+    }
     plantImage.append("userid", context.stateUser.user.userId);
     plantImage.append("nickname", nickname);
     plantImage.append("type", type);

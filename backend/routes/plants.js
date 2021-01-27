@@ -65,7 +65,11 @@ router.route("/discover/:search").get(async (req, res) => {
 });
 
 router.post("/add", upload.single("selectImage"), async (req, res, next) => {
-  const fileName = req.file.filename;
+  if (typeof req.file === "undefined") {
+    fileName = `Plant.jpg`;
+  } else {
+    fileName = req.file.filename;
+  }
   const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
   let newPlant = new Plant({
     userid: req.body.userid,
