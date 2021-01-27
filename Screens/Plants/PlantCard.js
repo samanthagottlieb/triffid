@@ -11,7 +11,7 @@ import {
 var { width } = Dimensions.get("window");
 
 const PlantCard = (props) => {
-  const { nickname, notes } = props;
+  const { nickname, notes, image } = props;
   return (
     <View style={styles.container}>
       <Image
@@ -20,8 +20,11 @@ const PlantCard = (props) => {
         nativeID="bannerImage"
       />
       <Image
-        source={require("../../assets/Plant2.jpg")}
         style={styles.image}
+        resizeMode="contain"
+        source={{
+          uri: image ? image : "http://localhost:5000/public/uploads/Plant.jpg",
+        }}
         nativeID="plantImage"
       />
       <View />

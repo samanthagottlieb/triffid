@@ -97,7 +97,7 @@ const SinglePlant = (props) => {
           </Text>
           <Text style={styles.attribute}>
             Last Watered:{" "}
-            {lastWatered === undefined
+            {lastWatered === undefined || lastWatered === null
               ? "Information not available"
               : lastWatered.toString().slice(0, 10)}
           </Text>
