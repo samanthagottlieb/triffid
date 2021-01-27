@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
-import Toast from "react-native-toast-message";
+import Error from "../../Shared/Error";
 
 // Context
 import AuthGlobal from "../../Context/store/AuthGlobal";
@@ -10,8 +10,9 @@ import { loginUser } from "../../Context/actions/Auth.actions";
 
 const LoginPage = ({ navigation }) => {
   const context = useContext(AuthGlobal);
-  const [email, setEmail] = useState({ value: "", error: "" });
-  const [password, setPassword] = useState({ value: "", error: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = () => {
     const user = {
@@ -20,7 +21,7 @@ const LoginPage = ({ navigation }) => {
     };
 
     if (email === "" || password === "") {
-      setError("Please fill in your email and password");
+      setError("Enter your email and password to login");
     } else {
       loginUser(user, context.dispatch);
     }
@@ -48,6 +49,7 @@ const LoginPage = ({ navigation }) => {
         onChangeText={(text) => setPassword(text)}
       />
       <View style={styles.buttonGroup}>
+        {error ? <Error message={error} /> : null}
         <Button title="Login" onPress={() => handleSubmit()} />
       </View>
       <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
