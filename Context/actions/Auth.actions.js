@@ -1,6 +1,7 @@
 import jwt_decode from "jwt-decode";
 import AsyncStorage from "@react-native-community/async-storage";
 import baseURL from "../../assets/common/baseUrl";
+import Toast from "react-native-toast-message";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
@@ -13,7 +14,13 @@ export const loginUser = (user, dispatch) => {
             "Content-Type": "application/json",
         },
     })
-    .then((res) => res.json())
+    .then((res) => res.json(), 
+        Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: "Login successful",
+              text2: "Welcome to Triffid"
+            }))
     .then((data) => {
         if (data) {
             const token = data.token;
@@ -25,7 +32,12 @@ export const loginUser = (user, dispatch) => {
         }
     })
     .catch((err) => {
-        console.log("Error: " + err) // add Toast displays for errors
+        Toast.show({
+              topOffset: 60,
+              type: "error",
+              text1: "Something went wrong 🙅",
+              text2: "Please try again"
+            })
         logoutUser(dispatch)
     });
 };
@@ -46,6 +58,12 @@ export const getUserProfile = (id) => {
 export const logoutUser = (dispatch) => {
     AsyncStorage.removeItem("jwt");
     dispatch(setCurrentUser({}))
+    Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: "Bye bye 👋",
+              text2: "You've been logged out"
+            })
 }
 
 export const setCurrentUser = (decoded, user) => {

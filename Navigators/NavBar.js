@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 // Stacks
 import PlantNavigator from "./PlantNavigator";
 import DiscoverNavigator from "./DiscoverNavigator";
+import LogoutPage from "../Screens/User/LogoutPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +39,7 @@ function NavBar() {
       />
       <Tab.Screen
         name="User"
-        component={PlantNavigator}
+        component={LogoutPage}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="user" color={color} size={30} />

@@ -1,13 +1,39 @@
 const { User } = require("../models/user.model");
 const router = require("express").Router();
-const fetch = require('node-fetch');
-let Plant = require("../models/plant.model")
+const fetch = require("node-fetch");
+const multer = require("multer");
+let Plant = require("../models/plant.model");
 
-const token = process.env.token
+const token = process.env.token;
+
+const FILE_TYPE_MAP = {
+  "image/png": "png",
+  "image/jpeg": "jpeg",
+  "image/jpg": "jpg",
+};
+
+// Defined storage for multer image upload
+const storage = multer.diskStorage({
+  // File destination
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/");
+  },
+  // Add back the file extensions that multer strips off
+  filename: function (req, file, cb) {
+    const fileName = file.originalname;
+    const extension = FILE_TYPE_MAP[file.mimetype];
+    cb(null, `${fileName}-${Date.now()}.${extension}`);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 25,
+  },
+});
 
 router.get("/", async (req, res) => {
-  // let filter = User.findById(req.body.id);
-  // const plantList = await Plant.find(filter)
   const plantList = await Plant.find().select(
     "nickname type wateringFrequency pottyChange notes -_id"
   );
@@ -19,28 +45,40 @@ router.get("/", async (req, res) => {
 });
 
 router.route("/discover").get(async (req, res) => {
-  const response = await fetch(`https://trefle.io/api/v1/plants?token=${token}`);
+  const searchFor = req.params.search;
+  const response = await fetch(
+    `https://trefle.io/api/v1/plants?token=${token}`
+  );
   const json = await response.json();
   const plantsInfo = json.data;
   res.json(plantsInfo);
 });
 
 router.route("/discover/:search").get(async (req, res) => {
-  const searchFor = req.params.search
-  const response = await fetch(`https://trefle.io/api/v1/plants/search?token=${token}&q=${searchFor}`);
+  const searchFor = req.params.search;
+  const response = await fetch(
+    `https://trefle.io/api/v1/plants/search?token=${token}&q=${searchFor}`
+  );
   const json = await response.json();
   const plantsInfo = json.data;
   res.json(plantsInfo);
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", upload.single("selectImage"), async (req, res, next) => {
+  if (typeof req.file === "undefined") {
+    fileName = `Plant.jpg`;
+  } else {
+    fileName = req.file.filename;
+  }
+  const basePath = `${req.protocol}://${req.get("host")}/public/uploads/`;
   let newPlant = new Plant({
     userid: req.body.userid,
     nickname: req.body.nickname,
     type: req.body.type,
+    lastWatered: req.body.lastWatered,
     wateringFrequency: req.body.wateringFrequency,
-    pottyChange: req.body.pottyChange,
     notes: req.body.notes,
+    image: `${basePath}${fileName}`,
   });
   newPlant = await newPlant.save();
 
@@ -69,6 +107,7 @@ router.route("/update/:id").post((req, res) => {
       plant.userid = req.body.userid;
       plant.nickname = req.body.nickname;
       plant.type = req.body.type;
+      plant.lastWatered = req.body.lastWatered;
       plant.wateringFrequency = req.body.wateringFrequency;
       plant.pottyChange = req.body.pottyChange;
       plant.notes = req.body.notes;
@@ -80,6 +119,5 @@ router.route("/update/:id").post((req, res) => {
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
-
 
 module.exports = router;

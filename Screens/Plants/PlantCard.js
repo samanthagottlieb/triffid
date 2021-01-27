@@ -11,7 +11,7 @@ import {
 var { width } = Dimensions.get("window");
 
 const PlantCard = (props) => {
-  const { nickname, notes } = props;
+  const { nickname, notes, image } = props;
   return (
     <View style={styles.container}>
       <Image
@@ -20,14 +20,19 @@ const PlantCard = (props) => {
         nativeID="bannerImage"
       />
       <Image
-        source={require("../../assets/Plant2.jpg")}
         style={styles.image}
+        resizeMode="contain"
+        source={{ uri: image }}
         nativeID="plantImage"
       />
       <View />
-      <Text style={styles.notes}>
-        {notes.length > 100 ? notes.substring(0, 100) + "..." : notes}
-      </Text>
+      {notes === undefined ? (
+        <Text style={styles.notes}>Click for more information...</Text>
+      ) : (
+        <Text style={styles.notes}>
+          {notes.length > 100 ? notes.substring(0, 100) + "..." : notes}
+        </Text>
+      )}
       <Text style={styles.title}>
         {nickname.length > 15
           ? nickname.substring(0, 15 - 3) + "..."

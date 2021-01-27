@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
-import { Item, Picker, Textarea } from "native-base";
+import { Item, Picker, Textarea, DatePicker } from "native-base";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
 import GreenButton from "../../Components/GreenButton";
@@ -10,21 +10,19 @@ import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AuthGlobal from "../../Context/store/AuthGlobal";
+import Toast from "react-native-toast-message";
 
 const PlantTypes = require("../../assets/data/PlantTypes.json");
 
 const EditPlant = (props) => {
-  // console.log(props.route.params.item._id)
+  console.log(props.route.params.lastWatered);
   const [nickname, setNickname] = useState(props.route.params.item.nickname);
   const [type, setType] = useState(props.route.params.item.type);
   const [wateringFrequency, setWateringFrequency] = useState(
     props.route.params.item.wateringFrequency
   );
-  const [pottyChange, setPottyChange] = useState(
-    props.route.params.item.setPottyChange
-  );
   const [notes, setNotes] = useState(props.route.params.item.notes);
-
+  const lastWatered = props.route.params.lastWatered;
   const context = useContext(AuthGlobal);
   const user = context.stateUser.user.userId;
   const handleDelete = () => {
@@ -34,7 +32,11 @@ const EditPlant = (props) => {
           headers: { Authorization: `Bearer ${res}` },
         })
         .then((response) => {
-          console.log(response);
+          Toast.show({
+              topOffset: 60,
+              type: "info",
+              text1: `${nickname} was deleted 😭`
+            })
         })
         .then(props.navigation.navigate("Plants"))
         .catch((error) => {
@@ -49,7 +51,7 @@ const EditPlant = (props) => {
       nickname: nickname,
       type: type,
       wateringFrequency: wateringFrequency,
-      pottyChange: pottyChange,
+      lastWatered: lastWatered,
       notes: notes,
     };
     AsyncStorage.getItem("jwt").then((res) => {
@@ -62,7 +64,11 @@ const EditPlant = (props) => {
           }
         )
         .then((response) => {
-          console.log(response);
+          Toast.show({
+              topOffset: 60,
+              type: "success",
+              text1: `${nickname} was updated 🧑‍🌾`
+            })
         })
         .then(
           setTimeout(() => {
@@ -108,7 +114,7 @@ const EditPlant = (props) => {
         placeholder={"Update Watering Frequency"}
         name={"wateringFrequency"}
         keyboardType={"numeric"}
-        onChangeText={(text) => setWateringFrequency(text)}
+        onChange={(text) => setWateringFrequency(text)}
       />
       <Textarea
         style={styles.notes}
@@ -158,23 +164,3 @@ const styles = StyleSheet.create({
 });
 
 export default EditPlant;
-
-// // Will need to import AsyncStorage to attain the JWT token to authenticate user to give priviladges to visit this page.
-
-// const AddPlantForm = (props) => {
-//   const [nickname, setNickname] = useState();
-//   const [type, setType] = useState();
-//   const [wateringFrequency, setWateringFrequency] = useState();
-//   const [pottyChange, setPottyChange] = useState();
-//   const [notes, setNotes] = useState();
-//   // Will also need some sort of setter here in order to receive the JWT to make the request to our API.
-
-//   return (
-
-// };
-
-// export default AddPlantForm;
-// Date picker for pot change.
-// <View style={styles.container}>
-
-// </View>

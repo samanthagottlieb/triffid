@@ -11,6 +11,8 @@ web-build/
 backend/.env
 backend/coverage/
 backend/node_modules/
-
+backend/package-lock.json
+backend/public/
+package-lock.json
 # macOS
 .DS_Store

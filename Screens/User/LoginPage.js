@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import FormContainer from "../../Shared/Forms/FormContainer";
 import Input from "../../Shared/Forms/Input";
+import Toast from "react-native-toast-message";
 
 // Context
 import AuthGlobal from "../../Context/store/AuthGlobal";
@@ -11,12 +12,6 @@ const LoginPage = ({ navigation }) => {
   const context = useContext(AuthGlobal);
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
-
-  useEffect(() => {
-    if (context.stateUser.isAuthenticated === true) {
-      navigation.navigate("Plants");
-    }
-  }, [context.stateUser.isAuthenticated]);
 
   const handleSubmit = () => {
     const user = {
@@ -38,7 +33,9 @@ const LoginPage = ({ navigation }) => {
         placeholder={"Email"}
         id={"email"}
         name={"email"}
-        value={email}
+        autoCorrect={false}
+        autoCapitalize="none"
+        value={email.value}
         onChangeText={(text) => setEmail(text.toLowerCase())}
       />
       <Input
@@ -47,7 +44,7 @@ const LoginPage = ({ navigation }) => {
         id={"Password"}
         secureTextEntry={true}
         name={"password"}
-        value={password}
+        value={password.value}
         onChangeText={(text) => setPassword(text)}
       />
       <View style={styles.buttonGroup}>
