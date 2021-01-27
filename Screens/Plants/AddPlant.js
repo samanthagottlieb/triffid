@@ -19,6 +19,7 @@ import baseURL from "../../assets/common/baseUrl";
 import AsyncStorage from "@react-native-community/async-storage";
 import Toast from "react-native-toast-message";
 import * as ImagePicker from "expo-image-picker";
+import mime from "mime";
 
 // const plantTypes =
 
@@ -54,24 +55,22 @@ const AddPlant = (props) => {
     if (result.cancelled === true) {
       return;
     }
-    const img = {
-      uri: result.uri,
-      type: result.type,
-      name:
-        result.fileName || result.uri.substr(result.uri.lastIndexOf("/") + 1),
-    };
-    setSelectImage(img);
+    setSelectImage(result.uri);
     setMainImage(result.uri);
   };
 
   const handleSubmit = () => {
-    const plantImage = new FormData();
-    plantImage.append("selectImage", "selectImage");
-    plantImage.append("selectImage", selectImage);
+    let plantImage = new FormData();
+    const newImageUri = "file:///" + selectImage.split("file:/").join("");
+    plantImage.append("selectImage", {
+      uri: newImageUri,
+      type: mime.getType(newImageUri),
+      name: newImageUri.split("/").pop(),
+    });
     plantImage.append("userid", context.stateUser.user.userId);
     plantImage.append("nickname", nickname);
     plantImage.append("type", type);
-    plantImage.append("lastWatered", lastWatered);
+    plantImage.append("lastWatered", lastWatered.toISOString());
     plantImage.append("wateringFrequency", wateringFrequency);
     plantImage.append("notes", notes);
 
@@ -87,6 +86,7 @@ const AddPlant = (props) => {
             },
           })
           .then((response) => {
+            console.log(response);
             Toast.show({
               topOffset: 60,
               type: "success",
@@ -96,7 +96,7 @@ const AddPlant = (props) => {
           .then(
             setTimeout(() => {
               props.navigation.navigate("Plants");
-            }, 500)
+            }, 1000)
           )
           .catch((error) => {
             console.log(`Error message: ${error}`);
