@@ -1,9 +1,17 @@
 import React, { Component, useEffect, useState } from "react";
-import { FlatList, StyleSheet, View, Image, Dimensions } from "react-native";
+import {
+  FlatList,
+  StyleSheet,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import baseURL from "../../assets/common/baseUrl";
 import axios from "axios";
 import { Container, Header, Icon, Item, Input, Text } from "native-base";
+import * as Linking from "expo-linking";
 
 var { width } = Dimensions.get("window");
 
@@ -17,7 +25,7 @@ const SearchPlants = () => {
           headers: { Authorization: `Bearer ${res}` },
         })
         .then((response) => {
-          setData({ data: response.data });
+          setData(response.data);
         })
         .catch((error) => {
           console.log(`Error message: ${error}`);
@@ -32,14 +40,13 @@ const SearchPlants = () => {
           headers: { Authorization: `Bearer ${res}` },
         })
         .then((response) => {
-          setData({ data: response.data });
+          setData(response.data);
         })
         .catch((error) => {
           console.log(`Error message: ${error}`);
         });
     });
   };
-
   return (
     <Container style={{ justifyContent: "center" }}>
       <Header searchBar rounded>
@@ -52,24 +59,32 @@ const SearchPlants = () => {
         </Item>
       </Header>
       <FlatList
-        data={data.data}
+        data={data}
         keyExtractor={(x, i) => i}
         renderItem={({ item }) => (
           // PlantCard
-          <View style={styles.container}>
-            <Image
-              source={require("../../assets/backgroundImage.png")}
-              style={styles.bannerImage}
-              nativeID="bannerImage"
-            />
-            <Image
-              source={{ uri: item.image_url }}
-              style={styles.image}
-              nativeID="plantImage"
-            />
-            <View />
-            <Text>{`${item.scientific_name}`}</Text>
-          </View>
+          <TouchableOpacity
+            style={{ width: "50%" }}
+            onPress={() =>
+              Linking.openURL(`https://google.com/search?q=${item.common_name}`)
+            }
+          >
+            <View style={styles.container}>
+              <Image
+                source={require("../../assets/backgroundImage.png")}
+                style={styles.bannerImage}
+                nativeID="bannerImage"
+              />
+              <Image
+                source={{ uri: item.image_url }}
+                style={styles.image}
+                nativeID="plantImage"
+              />
+              <View />
+              <Text style={styles.title}>{`${item.common_name}`}</Text>
+              <Text style={styles.notes}>{`${item.scientific_name}`}</Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
     </Container>
@@ -82,7 +97,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     marginTop: 55,
-    marginLeft: 10,
+    marginLeft: 33,
     overflow: "hidden",
     textAlign: "center",
     alignItems: "center",
@@ -108,7 +123,7 @@ const styles = StyleSheet.create({
     width: width / 2 - 20 - 10,
   },
   title: {
-    paddingTop: 235,
+    paddingTop: 220,
     color: "white",
     fontSize: 30,
     fontWeight: "bold",
@@ -119,7 +134,16 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingLeft: 20,
     paddingRight: 20,
-    fontSize: 11,
+    fontSize: 14,
+    fontStyle: "italic",
+    color: "#2F3E46",
+  },
+  notes: {
+    paddingTop: 15,
+    paddingLeft: 20,
+    paddingRight: 20,
+    fontSize: 14,
+    fontStyle: "italic",
     color: "#2F3E46",
   },
 });
