@@ -12,7 +12,6 @@ var { width } = Dimensions.get("window");
 
 const PlantCard = (props) => {
   const { nickname, notes, image } = props;
-  console.log({ uri: image });
   return (
     <View style={styles.container}>
       <Image
@@ -23,7 +22,9 @@ const PlantCard = (props) => {
       <Image
         style={styles.image}
         resizeMode="contain"
-        source={{ uri: image }}
+        source={{
+          uri: image ? image : "http://localhost:5000/public/uploads/Plant.jpg",
+        }}
         nativeID="plantImage"
       />
       <View />

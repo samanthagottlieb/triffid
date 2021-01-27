@@ -1,12 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  View,
-  Text,
-  Image,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useContext } from "react";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Item, Picker, Textarea, DatePicker } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormContainer from "../../Shared/Forms/FormContainer";
@@ -36,11 +29,12 @@ const AddPlant = (props) => {
   const context = useContext(AuthGlobal);
   // const user = context.stateUser.user.userId;
 
+  // DatePicker event handler
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || lastWatered;
     setLastWatered(currentDate);
   };
-
+  // ImagePicker event handler
   let openImage = async () => {
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permission.granted === false) {
@@ -58,7 +52,7 @@ const AddPlant = (props) => {
     setSelectImage(result.uri);
     setMainImage(result.uri);
   };
-
+  // Add Button event handler
   const handleSubmit = () => {
     let plantImage = new FormData();
     const newImageUri = "file:///" + selectImage.split("file:/").join("");
