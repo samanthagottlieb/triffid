@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "server": "nodemon app",
     "test": "jest --coverage",
     "testWatch": "jest --coverage --watch",
     "testDetect": "jest --detectOpenHandles"
@@ -26,6 +27,6 @@
     "eslint": "^7.18.0",
     "jest": "^26.6.3",
     "mongodb-memory-server": "^6.9.3",
-    "supertest": "^6.1.1"
+    "supertest": "^6.1.3"
   }
 }

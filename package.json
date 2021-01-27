@@ -10,11 +10,11 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "0.1.10",
-    "@react-navigation/bottom-tabs": "^5.11.3",
-    "@react-navigation/native": "^5.9.0",
-    "@react-navigation/stack": "^5.13.0",
+    "@react-navigation/bottom-tabs": "^5.11.7",
+    "@react-navigation/native": "^5.9.2",
+    "@react-navigation/stack": "^5.14.2",
     "axios": "^0.21.1",
-    "expo": "^40.0.0",
+    "expo": "^40.0.1",
     "expo-image-picker": "~9.2.0",
     "expo-status-bar": "~1.0.3",
     "jsonwebtoken": "^8.5.1",
@@ -37,7 +37,7 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "^7.9.6"
   },
   "private": true
 }
