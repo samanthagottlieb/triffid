@@ -2,6 +2,9 @@ const { User } = require("../models/user.model");
 const router = require("express").Router();
 const multer = require("multer");
 let Plant = require("../models/plant.model");
+const fetch = require('node-fetch');
+
+const token = process.env.token
 
 const FILE_TYPE_MAP = {
   "image/png": "png",
@@ -39,6 +42,22 @@ router.get("/", async (req, res) => {
     res.status(500).json({ success: false });
   }
   res.send(plantList);
+});
+
+router.route("/discover").get(async (req, res) => {
+  const searchFor = req.params.search
+  const response = await fetch(`https://trefle.io/api/v1/plants?token=${token}`);
+  const json = await response.json();
+  const plantsInfo = json.data;
+  res.json(plantsInfo);
+});
+
+router.route("/discover/:search").get(async (req, res) => {
+  const searchFor = req.params.search
+  const response = await fetch(`https://trefle.io/api/v1/plants/search?token=${TOKEN}&q=${searchFor}`);
+  const json = await response.json();
+  const plantsInfo = json.data;
+  res.json(plantsInfo);
 });
 
 router.post("/add", upload.single("selectImage"), async (req, res, next) => {
@@ -92,5 +111,6 @@ router.route("/update/:id").post((req, res) => {
     })
     .catch((err) => res.status(400).json("Error: " + err));
 });
+
 
 module.exports = router;
