@@ -33,7 +33,9 @@ const LoginPage = ({ navigation }) => {
         placeholder={"Email"}
         id={"email"}
         name={"email"}
-        value={email}
+        autoCorrect={false}
+        autoCapitalize="none"
+        value={email.value}
         onChangeText={(text) => setEmail(text.toLowerCase())}
       />
       <Input
@@ -42,7 +44,7 @@ const LoginPage = ({ navigation }) => {
         id={"Password"}
         secureTextEntry={true}
         name={"password"}
-        value={password}
+        value={password.value}
         onChangeText={(text) => setPassword(text)}
       />
       <View style={styles.buttonGroup}>

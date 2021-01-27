@@ -22,7 +22,7 @@ const AddPlant = (props) => {
   const [nickname, setNickname] = useState();
   const [type, setType] = useState();
   const [lastWatered, setLastWatered] = useState(new Date());
-  const [wateringFrequency, setWateringFrequency] = useState();
+  const [wateringFrequency, setWateringFrequency] = useState(7);
   const [notes, setNotes] = useState();
   const [selectImage, setSelectImage] = useState(null);
   const [mainImage, setMainImage] = useState();
