@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(authJwt());
 app.use(errorHandler);
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 
 const plantsRouter = require("./routes/plants");
 const usersRouter = require("./routes/users");
