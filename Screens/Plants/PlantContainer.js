@@ -54,13 +54,10 @@ const PlantContainer = (props) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           data={plants.reverse()}
-          renderItem={({ item }) => (
-            <PlantList
-              navigation={props.navigation}
-              key={item.name}
-              item={item}
-            />
+          renderItem={({ item, index }) => (
+            <PlantList navigation={props.navigation} key={index} item={item} />
           )}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     </View>
