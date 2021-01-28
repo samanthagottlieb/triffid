@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { Item, Picker, Textarea, DatePicker } from "native-base";
 import FormContainer from "../../Shared/Forms/FormContainer";
@@ -9,34 +9,35 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
-import AuthGlobal from "../../Context/store/AuthGlobal";
 import Toast from "react-native-toast-message";
 
 const PlantTypes = require("../../assets/data/PlantTypes.json");
 
 const EditPlant = (props) => {
-  console.log(props.route.params.lastWatered);
-  const [nickname, setNickname] = useState(props.route.params.item.nickname);
-  const [type, setType] = useState(props.route.params.item.type);
+  const plant = props.route.params;
+  const [nickname, setNickname] = useState(plant.nickname);
+  const [type, setType] = useState(plant.type);
   const [wateringFrequency, setWateringFrequency] = useState(
-    props.route.params.item.wateringFrequency
+    plant.wateringFrequency
   );
-  const [notes, setNotes] = useState(props.route.params.item.notes);
-  const lastWatered = props.route.params.lastWatered;
-  const context = useContext(AuthGlobal);
-  const user = context.stateUser.user.userId;
+  const [notes, setNotes] = useState(plant.notes);
+  const [lastWatered, setLastWatered] = useState(plant.lastWatered);
+  const userid = plant.userid;
+  const plantid = plant.plantid;
+  const [image, setImage] = useState(plant.image);
+
   const handleDelete = () => {
     AsyncStorage.getItem("jwt").then((res) => {
       axios
-        .delete(`${baseURL}plants/${props.route.params.item._id}`, {
+        .delete(`${baseURL}plants/${plantid}`, {
           headers: { Authorization: `Bearer ${res}` },
         })
         .then((response) => {
           Toast.show({
-              topOffset: 60,
-              type: "info",
-              text1: `${nickname} was deleted 😭`
-            })
+            topOffset: 60,
+            type: "info",
+            text1: `${nickname} was deleted 😭`,
+          });
         })
         .then(props.navigation.navigate("Plants"))
         .catch((error) => {
@@ -47,28 +48,25 @@ const EditPlant = (props) => {
 
   const handleUpdate = () => {
     const updatedPlant = {
-      userid: context.stateUser.user.userId,
+      userid: userid,
       nickname: nickname,
       type: type,
       wateringFrequency: wateringFrequency,
       lastWatered: lastWatered,
       notes: notes,
+      image: image,
     };
     AsyncStorage.getItem("jwt").then((res) => {
       axios
-        .post(
-          `${baseURL}plants/update/${props.route.params.item._id}`,
-          updatedPlant,
-          {
-            headers: { Authorization: `Bearer ${res}` },
-          }
-        )
+        .post(`${baseURL}plants/update/${plantid}`, updatedPlant, {
+          headers: { Authorization: `Bearer ${res}` },
+        })
         .then((response) => {
           Toast.show({
-              topOffset: 60,
-              type: "success",
-              text1: `${nickname} was updated 🧑‍🌾`
-            })
+            topOffset: 60,
+            type: "success",
+            text1: `${nickname} was updated 🧑‍🌾`,
+          });
         })
         .then(
           setTimeout(() => {
@@ -83,11 +81,7 @@ const EditPlant = (props) => {
 
   return (
     <FormContainer
-      title={
-        props.route.params.item.nickname.length < 10
-          ? `Edit ${props.route.params.item.nickname}`
-          : `Edit Plant`
-      }
+      title={nickname.length < 10 ? `Edit ${nickname}` : `Edit Plant`}
     >
       <Input
         placeholder={"Update Nickname"}
