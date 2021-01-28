@@ -35,7 +35,10 @@ const AddPlant = (props) => {
   // const user = context.stateUser.user.userId;
 
   useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    LogBox.ignoreLogs([
+      "VirtualizedLists should never be nested",
+      "Non-serializable values were found in the navigation state.",
+    ]);
   }, []);
   // DatePicker event handler
   const onChange = (event, selectedDate) => {
@@ -171,7 +174,6 @@ const AddPlant = (props) => {
         <Textarea
           style={styles.notes}
           rowSpan={8}
-          bordered
           value={notes}
           placeholderTextColor="#d3d3d3"
           placeholder="Notes?"
@@ -219,7 +221,7 @@ const styles = StyleSheet.create({
     margin: 30,
     borderRadius: 5,
     padding: 12,
-    borderWidth: 4,
+    borderWidth: 2,
     borderColor: "#84A98C",
     fontSize: 17,
     color: "#CAD2C5",

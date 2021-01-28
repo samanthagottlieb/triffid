@@ -12,14 +12,15 @@ import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import GreenButton from "../../Components/GreenButton";
 import WaterButton from "../../Components/WaterButton";
-import AuthGlobal from "../../Context/store/AuthGlobal";
 import Toast from "react-native-toast-message";
 
 var { width } = Dimensions.get("window");
 
 const SinglePlant = (props) => {
   const plant = props.route.params.item;
-  const [lastWatered, setLastWatered] = useState(plant.lastWatered);
+  const [lastWatered, setLastWatered] = useState(
+    new Date(Date.parse(plant.lastWatered))
+  );
   const wateringFrequency = plant.wateringFrequency;
   const image = plant.image;
   const notes = plant.notes;
