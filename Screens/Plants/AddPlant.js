@@ -19,6 +19,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Toast from "react-native-toast-message";
 import * as ImagePicker from "expo-image-picker";
 import mime from "mime";
+import Error from "../../Shared/Error";
 
 // const plantTypes =
 
@@ -31,6 +32,7 @@ const AddPlant = (props) => {
   const [wateringFrequency, setWateringFrequency] = useState("7");
   const [notes, setNotes] = useState("");
   const [selectImage, setSelectImage] = useState(null);
+  const [error, setError] = useState("");
   const context = useContext(AuthGlobal);
   // const user = context.stateUser.user.userId;
 
@@ -81,7 +83,7 @@ const AddPlant = (props) => {
     plantImage.append("notes", notes);
 
     if (nickname === "" || type === "") {
-      setError("Please fill in the plant information");
+      setError("Please enter a nickname and plant type");
     } else {
       AsyncStorage.getItem("jwt").then((res) => {
         axios
@@ -179,6 +181,7 @@ const AddPlant = (props) => {
           placeholder="Notes?"
           onChangeText={(text) => setNotes(text)}
         />
+        {error ? <Error message={error} /> : null}
         <GreenButton
           style={styles.buttons}
           text="Add plant"
