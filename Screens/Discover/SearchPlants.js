@@ -60,7 +60,7 @@ const SearchPlants = () => {
       </Header>
       <FlatList
         data={data}
-        keyExtractor={(x, i) => i}
+        keyExtractor={(x, i) => i.toString()}
         renderItem={({ item }) => (
           // PlantCard
           <TouchableOpacity
