@@ -5,11 +5,13 @@ import Input from "../../Shared/Forms/Input";
 import Toast from "react-native-toast-message";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
+import Error from "../../Shared/Error";
 
 const SignupPage = ({ navigation }) => {
-  const [name, setName] = useState({ value: "", error: "" });
-  const [email, setEmail] = useState({ value: "", error: "" });
-  const [password, setPassword] = useState({ value: "", error: "" });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = () => {
     const user = {
@@ -56,7 +58,7 @@ const SignupPage = ({ navigation }) => {
         id={"name"}
         name={"name"}
         autoCorrect={false}
-        value={name.value}
+        value={name}
         onChangeText={(text) => setName(text)}
       />
       <Input
@@ -66,7 +68,7 @@ const SignupPage = ({ navigation }) => {
         name={"email"}
         autoCorrect={false}
         autoCapitalize="none"
-        value={email.value}
+        value={email}
         onChangeText={(text) => setEmail(text.toLowerCase())}
       />
       <Input
@@ -75,10 +77,11 @@ const SignupPage = ({ navigation }) => {
         id={"Password"}
         secureTextEntry={true}
         name={"password"}
-        value={password.value}
+        value={password}
         onChangeText={(text) => setPassword(text)}
       />
       <View style={styles.buttonGroup}>
+        {error ? <Error message={error} /> : null}
         <Button title="Sign up" onPress={() => handleSubmit()} />
       </View>
       <View style={[{ marginTop: 40 }, styles.buttonGroup]}>
