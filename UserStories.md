@@ -2,11 +2,11 @@
 <h1 align="center"><img width="200" alt="Screenshot 2021-01-28 at 15 53 13" src="https://user-images.githubusercontent.com/65411964/106170648-8f25d580-6188-11eb-8597-0160cd9ec8f1.png"> </h1>
 
 
-## <span style="color:  #52796F">**User Stories:**</span>
+**User Stories:**
 
 <p>&nbsp;</p>
 
-### <span style="color: #84A98C">*User stories that support our MVP:*</span>
+### *User stories that support our MVP:*
 <p>&nbsp;</p>
 
 ```
@@ -43,7 +43,7 @@ I want to be able to delete a plant
 <p>&nbsp;</p>
 
 
-### <span style="color: #84A98C">*User stories that support extra features implementation:*</span>
+### *User stories that support extra features implementation:*
 <p>&nbsp;</p>
 
 ```

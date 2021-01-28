@@ -3,10 +3,10 @@
 
 
 
-As our final project for Makers Academy, we created <span style="color: #52796F">**Triffid**</span>, a mobile app, compatible with both iOS and Android, that aims to help users monitoring their house plants.   
+As our final project for Makers Academy, we created **Triffid**, a mobile app, compatible with both iOS and Android, that aims to help users monitoring their house plants.   
 
 
-In order to access the User Stories that underlie the project implementation, please click on [<span style="color: #84A98C">**User Stories**</span>](https://github.com/samanthagottlieb/triffid/blob/updatingREADME/UserStories.md).
+In order to access the User Stories that underlie the project implementation, please click on [**User Stories**](https://github.com/samanthagottlieb/triffid/blob/updatingREADME/UserStories.md).
 
 
 
