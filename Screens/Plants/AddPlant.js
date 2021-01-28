@@ -1,5 +1,11 @@
-import React, { useState, useContext } from "react";
-import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useContext, useEffect } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  LogBox,
+} from "react-native";
 import { Item, Picker, Textarea, DatePicker } from "native-base";
 import Icon from "react-native-vector-icons/FontAwesome";
 import FormContainer from "../../Shared/Forms/FormContainer";
@@ -19,16 +25,18 @@ import mime from "mime";
 const PlantTypes = require("../../assets/data/PlantTypes.json");
 
 const AddPlant = (props) => {
-  const [nickname, setNickname] = useState();
-  const [type, setType] = useState();
+  const [nickname, setNickname] = useState("");
+  const [type, setType] = useState("");
   const [lastWatered, setLastWatered] = useState(new Date());
   const [wateringFrequency, setWateringFrequency] = useState("7");
   const [notes, setNotes] = useState("");
   const [selectImage, setSelectImage] = useState(null);
-  const [mainImage, setMainImage] = useState();
   const context = useContext(AuthGlobal);
   // const user = context.stateUser.user.userId;
 
+  useEffect(() => {
+    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+  }, []);
   // DatePicker event handler
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || lastWatered;
@@ -50,7 +58,6 @@ const AddPlant = (props) => {
       return;
     }
     setSelectImage(result.uri);
-    setMainImage(result.uri);
   };
   // Add Button event handler
   const handleSubmit = () => {
@@ -102,14 +109,14 @@ const AddPlant = (props) => {
   };
 
   return (
-    <KeyboardAwareScrollView
-      viewIsInsideTabBar={true}
-      extraHeight={200}
-      enableOnAndroid={true}
-    >
+      <KeyboardAwareScrollView
+        viewIsInsideTabBar={true}	
+        extraHeight={200}	
+        enableOnAndroid={true}	
+      >
       <FormContainer title={"Add a new plant"}>
         <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{ uri: mainImage }} />
+          <Image style={styles.image} source={{ uri: selectImage }} />
           <TouchableOpacity onPress={openImage} style={styles.imagePicker}>
             <Icon style={{ color: "white" }} name="camera" />
           </TouchableOpacity>
@@ -124,7 +131,6 @@ const AddPlant = (props) => {
           <Item picker>
             <Picker
               mode="dropdown"
-              style={{ width: undefined }}
               selectedValue={type}
               placeholder="Type of plant eg 'cactus'"
               onValueChange={(e) => setType(e)}
@@ -138,7 +144,6 @@ const AddPlant = (props) => {
         <Input
           placeholder={"Watering frequency eg 'every 7 days'"}
           name={"wateringFrequency"}
-          value={wateringFrequency}
           keyboardType={"numeric"}
           onChangeText={(text) => setWateringFrequency(text)}
         />
@@ -164,6 +169,7 @@ const AddPlant = (props) => {
           rowSpan={8}
           bordered
           value={notes}
+          placeholderTextColor="#d3d3d3"
           placeholder="Notes?"
           onChangeText={(text) => setNotes(text)}
         />

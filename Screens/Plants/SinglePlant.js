@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  Button,
   Image,
   Text,
   ScrollView,
@@ -27,6 +26,7 @@ const SinglePlant = (props) => {
   );
   const wateringFrequency = props.route.params.item.wateringFrequency;
   const notes = props.route.params.item.notes;
+  const image = props.route.params.item.image;
   const context = useContext(AuthGlobal);
   const user = context.stateUser.user.userId;
 
@@ -82,7 +82,7 @@ const SinglePlant = (props) => {
       <View style={styles.container}>
         <View style={styles.upperContainer} />
         <Image
-          source={require("../../assets/Plant2.jpg")}
+          source={{ uri: image }}
           style={styles.image}
           nativeID="plantImage"
         />
