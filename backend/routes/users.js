@@ -4,15 +4,6 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-router.get(`/`, async (req, res) => {
-  const userList = await User.find().select("-passwordHash");
-
-  if (!userList) {
-    res.status(500).json({ success: false });
-  }
-  res.send(userList);
-});
-
 router.get("/:id", async (req, res) => {
   const user = await User.findById(req.params.id).select("-passwordHash");
   // .select('-passwordHash') returns data when you call the api
