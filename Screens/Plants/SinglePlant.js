@@ -12,23 +12,22 @@ import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import GreenButton from "../../Components/GreenButton";
 import WaterButton from "../../Components/WaterButton";
-import AuthGlobal from "../../Context/store/AuthGlobal";
 import Toast from "react-native-toast-message";
 
 var { width } = Dimensions.get("window");
 
 const SinglePlant = (props) => {
-  const [item, setItem] = useState(props.route.params.item);
-  const nickname = props.route.params.item.nickname;
-  const type = props.route.params.item.type;
+  const plant = props.route.params.item;
   const [lastWatered, setLastWatered] = useState(
-    props.route.params.item.lastWatered
+    new Date(Date.parse(plant.lastWatered))
   );
-  const wateringFrequency = props.route.params.item.wateringFrequency;
-  const notes = props.route.params.item.notes;
-  const image = props.route.params.item.image;
-  const context = useContext(AuthGlobal);
-  const user = context.stateUser.user.userId;
+  const wateringFrequency = plant.wateringFrequency;
+  const image = plant.image;
+  const notes = plant.notes;
+  const nickname = plant.nickname;
+  const type = plant.type;
+  const userid = plant.userid;
+  const plantid = plant._id;
 
   useEffect(() => {
     const today = Date.now();
@@ -48,22 +47,19 @@ const SinglePlant = (props) => {
   const handleSubmit = () => {
     setLastWatered(new Date());
     const updateLastWatered = {
-      userid: user,
-      lastWatered: new Date(),
-      wateringFrequency: wateringFrequency,
-      notes: notes,
+      userid: userid,
       nickname: nickname,
       type: type,
+      lastWatered: lastWatered,
+      wateringFrequency: wateringFrequency,
+      notes: notes,
+      image: image,
     };
     AsyncStorage.getItem("jwt").then((res) => {
       axios
-        .post(
-          `${baseURL}plants/update/${props.route.params.item._id}`,
-          updateLastWatered,
-          {
-            headers: { Authorization: `Bearer ${res}` },
-          }
-        )
+        .post(`${baseURL}plants/update/${plantid}`, updateLastWatered, {
+          headers: { Authorization: `Bearer ${res}` },
+        })
         .then((response) => {
           Toast.show({
             topOffset: 376,
@@ -87,12 +83,12 @@ const SinglePlant = (props) => {
           nativeID="plantImage"
         />
         <View style={styles.lowerContainer}>
-          <Text style={styles.nickname}>{item.nickname}</Text>
+          <Text style={styles.nickname}>{nickname}</Text>
           <WaterButton onPress={() => handleSubmit()} />
-          <Text style={styles.attribute}>{item.type}</Text>
+          <Text style={styles.attribute}>{type}</Text>
           <Text style={styles.attribute}>
             Watering Frequency: Every{" "}
-            {item.wateringFrequency === 1 ? "day" : `${wateringFrequency} days`}
+            {wateringFrequency === 1 ? "day" : `${wateringFrequency} days`}
           </Text>
           <Text style={styles.attribute}>
             Last Watered:{" "}
@@ -100,15 +96,21 @@ const SinglePlant = (props) => {
               ? "Information not available"
               : lastWatered.toString().slice(0, 10)}
           </Text>
-          <Text style={styles.notes}>{item.notes}</Text>
+          <Text style={styles.notes}>{notes}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <GreenButton
             text="Update"
             onPress={() =>
               props.navigation.navigate("Edit Plant", {
-                item: item,
+                plantid: plantid,
+                userid: userid,
+                nickname: nickname,
+                type: type,
+                image: image,
+                wateringFrequency: wateringFrequency,
                 lastWatered: lastWatered,
+                notes: notes,
               })
             }
           />

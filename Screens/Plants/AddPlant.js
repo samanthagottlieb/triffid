@@ -35,7 +35,10 @@ const AddPlant = (props) => {
   // const user = context.stateUser.user.userId;
 
   useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    LogBox.ignoreLogs([
+      "VirtualizedLists should never be nested",
+      "Non-serializable values were found in the navigation state.",
+    ]);
   }, []);
   // DatePicker event handler
   const onChange = (event, selectedDate) => {
@@ -109,11 +112,11 @@ const AddPlant = (props) => {
   };
 
   return (
-      <KeyboardAwareScrollView
-        viewIsInsideTabBar={true}	
-        extraHeight={200}	
-        enableOnAndroid={true}	
-      >
+    <KeyboardAwareScrollView
+      viewIsInsideTabBar={true}
+      extraHeight={200}
+      enableOnAndroid={true}
+    >
       <FormContainer title={"Add a new plant"}>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={{ uri: selectImage }} />
@@ -128,10 +131,11 @@ const AddPlant = (props) => {
           onChangeText={(text) => setNickname(text)}
         />
         <View style={styles.container}>
-          <Item picker>
+          <Item picker style={styles.picker}>
             <Picker
               mode="dropdown"
               selectedValue={type}
+              placeholderIconColor={"#e0e0e0"}
               placeholder="Type of plant eg 'cactus'"
               onValueChange={(e) => setType(e)}
             >
@@ -142,7 +146,7 @@ const AddPlant = (props) => {
           </Item>
         </View>
         <Input
-          placeholder={"Watering frequency eg 'every 7 days'"}
+          placeholder={"Watering frequency in days"}
           name={"wateringFrequency"}
           keyboardType={"numeric"}
           onChangeText={(text) => setWateringFrequency(text)}
@@ -158,8 +162,11 @@ const AddPlant = (props) => {
             modalTransparent={false}
             animationType={"fade"}
             androidMode={"default"}
-            placeHolderText="Select Date of Last Watering"
+            placeHolderText={`Last watered: ${lastWatered
+              .toString()
+              .slice(0, 10)}`}
             placeHolderTextStyle={{ color: "#d3d3d3" }}
+            textStyle={{ color: "green" }}
             onChange={onChange}
             disabled={false}
           />
@@ -167,7 +174,6 @@ const AddPlant = (props) => {
         <Textarea
           style={styles.notes}
           rowSpan={8}
-          bordered
           value={notes}
           placeholderTextColor="#d3d3d3"
           placeholder="Notes?"
@@ -196,12 +202,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#CAD2C5",
   },
+  picker: {
+    right: 13,
+    color: "#e0e0e0",
+  },
   datepicker: {
     backgroundColor: "#fafafa",
     position: "absolute",
     width: 400,
     bottom: 370,
-    left: 50,
+    left: 40,
     right: 100,
   },
   notes: {
@@ -210,8 +220,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     margin: 30,
     borderRadius: 5,
-    padding: 10,
-    borderWidth: 4,
+    padding: 12,
+    borderWidth: 2,
     borderColor: "#84A98C",
     fontSize: 17,
     color: "#CAD2C5",
