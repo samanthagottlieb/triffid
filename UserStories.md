@@ -56,8 +56,4 @@ As a user
 So that I remember to water my plants
 I want to be sent a reminder notification
 ```
-```
-As a user
-So that I am aware of how the weather might affect my plants
-I want to be notified of certain weather changes
-```
+
