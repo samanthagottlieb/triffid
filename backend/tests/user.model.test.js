@@ -1,12 +1,11 @@
 const app = require("../server");
 const supertest = require("supertest");
 const request = supertest(app);
-const createUser = require('./test-helper').createUser;
+const createUser = require("./signup-helper").createUser;
 const dbHandler = require("./db-handler");
 const authTests = require("./auth-helpers");
 const authJwt = require("../helpers/jwt");
 require("dotenv").config();
-
 const UserModel = require("../models/user.model");
 
 beforeAll(async () => await dbConnect());
@@ -31,9 +30,11 @@ describe("User", () => {
     });
   });
 
-  // describe("Login", () => {
-  //   it("A user can log in with an encrypted password", async () => {
-      
-  //   });
-
+  describe("Login", () => {
+    it("A user can log in with", async () => {
+      let user = await createUser();
+      let userLoggedIn = await logInUser();
+      expect(userLoggedIn.status).toEqual(200);
+    });
+  });
 });
