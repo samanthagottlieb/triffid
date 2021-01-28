@@ -109,7 +109,11 @@ const AddPlant = (props) => {
   };
 
   return (
-    <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView
+        viewIsInsideTabBar={true}	
+        extraHeight={200}	
+        enableOnAndroid={true}	
+      >
       <FormContainer title={"Add a new plant"}>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={{ uri: selectImage }} />
