@@ -28,18 +28,17 @@ src="https://user-images.githubusercontent.com/65411964/106216737-b2be3f80-61cb-
 <p>&nbsp;</p>
 
 * Registration and Sign In 
-* Create and edit house plants profiles:
-    * Nickname and type of plant;
-    * Watering frequency;
-    * Last time watered;
-    * Notes section.
-* Edition
-* Notifications
+* Create and edit house plant profiles:
+    * Nickname and type of plant
+    * Watering frequency
+    * Last time watered
+    * Notes section
+* Notifications when plants need watering
 * Plant Discovery - using [**Trefle**](https://trefle.io/) API
 
 <p>&nbsp;</p>
 
-## 🌱 **Tech Stack:**
+## 🌱 **Technologies Used:**
 <p>&nbsp;</p>
 
 *Built with MERN stack:*
@@ -47,23 +46,23 @@ src="https://user-images.githubusercontent.com/65411964/106216737-b2be3f80-61cb-
 * Mongo DB Atlas
 * Express (Node.js) 
 * React Native (Expo)
-<p>&nbsp;</p>
 
-* Jest *for Unit Testing*
+*Tools:*
+
+* Jest *for unit testing*
 * Trello *for workflow*
-* Balsamic and Figma *for wireframing*
+* Balsamiq and Figma *for wireframing and mockups*
 
 * Insomnia *as an API testing tool*
-* Xcode *for User Interface testing*
+* Xcode *for user interface testing*
 
 <p>&nbsp;</p>
 
 ## 🌱 **Installation & Usage:**
 <p>&nbsp;</p>
-After cloning the project, execute, by order, the following commands: 
+After cloning the project, execute the following commands: 
 <p>&nbsp;</p>
 
-### **Backend & Frontend:**
 In the project root directory:
 ```bash
 npm install -g expo-cli 
@@ -85,6 +84,15 @@ Return to the project root directory and execute the command below to run the pr
 expo start  
 ```
 <p>&nbsp;</p>
+
+### **Tests**
+Unit Tests
+
+```bash
+cd backend
+npm test
+```
+
 
 ## 🌱 **Team:**
 
