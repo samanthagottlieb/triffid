@@ -8,7 +8,7 @@ src="https://user-images.githubusercontent.com/65411964/106170648-8f25d580-6188-
 ![Shields](https://img.shields.io/david/dev/samanthagottlieb/triffid)
 ![APM](https://img.shields.io/apm/l/react)
 
- As our final project for *Makers Academy*, we created **Triffid**, a mobile app, compatible with both iOS and Android operating systems, that aims to help users monitoring their house plants.   
+ As our final project for *Makers Academy*, we created **Triffid**, a mobile app, compatible with both iOS and Android operating systems, that aims to help users monitor their house plants.   
 
 
 In order to access the User Stories that underlie the project implementation, please click on [**User Stories**](https://github.com/samanthagottlieb/triffid/blob/updatingREADME/UserStories.md).
@@ -48,11 +48,9 @@ src="https://user-images.githubusercontent.com/65411964/106216737-b2be3f80-61cb-
 * React Native (Expo)
 
 *Tools:*
-
 * Jest *for unit testing*
 * Trello *for workflow*
 * Balsamiq and Figma *for wireframing and mockups*
-
 * Insomnia *as an API testing tool*
 * Xcode *for user interface testing*
 
@@ -70,6 +68,7 @@ npm install -g nodemon
 npm install 
 ```
 ### **Backend:**
+To run the server:
 
 ```bash 
 cd backend
@@ -78,7 +77,7 @@ nodemon app
 ```
 
 ### **Frontend** 
-Return to the project root directory and execute the command below to run the project.
+Return to the project root directory and execute the command below to launch the app:
 
 ```bash
 expo start  
