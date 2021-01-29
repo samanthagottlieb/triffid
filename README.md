@@ -8,7 +8,7 @@ src="https://user-images.githubusercontent.com/65411964/106170648-8f25d580-6188-
 ![Shields](https://img.shields.io/david/dev/samanthagottlieb/triffid)
 ![APM](https://img.shields.io/apm/l/react)
 
- As our final project for *Makers Academy*, we created **Triffid**, a mobile app, compatible with both iOS and Android operating systems, that aims to help users monitoring their house plants.   
+ As our final project for *Makers Academy*, we created **Triffid**, a mobile app, compatible with both iOS and Android operating systems, that aims to help users monitor their house plants.   
 
 
 In order to access the User Stories that underlie the project implementation, please click on [**User Stories**](https://github.com/samanthagottlieb/triffid/blob/updatingREADME/UserStories.md).
