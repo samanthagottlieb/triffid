@@ -26,7 +26,7 @@ const EditPlant = (props) => {
   const plantid = plant.plantid;
 
   useEffect(() => {
-    LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+    LogBox.ignoreAllLogs(true);
   }, []);
 
   // DatePicker event handler
