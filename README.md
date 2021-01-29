@@ -3,7 +3,10 @@
 alt="Triffid Logo" 
 src="https://user-images.githubusercontent.com/65411964/106170648-8f25d580-6188-11eb-8597-0160cd9ec8f1.png"> </h1>
 
-![GitHub top language](https://img.shields.io/github/languages/top/samanthagottlieb/triffid)![npm](https://img.shields.io/npm/v/npm)![Shields](https://img.shields.io/david/dev/samanthagottlieb/triffid) ![APM](https://img.shields.io/apm/l/react)
+![GitHub top language](https://img.shields.io/github/languages/top/samanthagottlieb/triffid)
+![npm](https://img.shields.io/npm/v/npm)
+![Shields](https://img.shields.io/david/dev/samanthagottlieb/triffid)
+![APM](https://img.shields.io/apm/l/react)
 
  As our final project for *Makers Academy*, we created **Triffid**, a mobile app, compatible with both iOS and Android operating systems, that aims to help users monitoring their house plants.   
 
