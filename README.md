@@ -82,7 +82,6 @@ Return to the project root directory and execute the command below to launch the
 ```bash
 expo start  
 ```
-<p>&nbsp;</p>
 
 ### **Tests**
 Unit Tests
