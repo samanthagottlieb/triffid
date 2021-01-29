@@ -8,10 +8,9 @@ src="https://user-images.githubusercontent.com/65411964/106170648-8f25d580-6188-
 ![Shields](https://img.shields.io/david/dev/samanthagottlieb/triffid)
 ![APM](https://img.shields.io/apm/l/react)
 
- As our final project for *Makers Academy*, we created **Triffid**, a mobile app, compatible with both iOS and Android operating systems, that aims to help users monitor their house plants.   
+ As our final project for *Makers Academy*, we created **Triffid**. It's a mobile app that helps users monitor their house plants and it's built using React Native so it's compatible with both iOS and Android operating systems.   
 
-
-In order to access the User Stories that underlie the project implementation, please click on [**User Stories**](https://github.com/samanthagottlieb/triffid/blob/updatingREADME/UserStories.md).
+Read our **User Stories** [here](https://github.com/samanthagottlieb/triffid/blob/updatingREADME/UserStories.md).
 
 <p>&nbsp;</p>
 
@@ -41,7 +40,7 @@ src="https://user-images.githubusercontent.com/65411964/106216737-b2be3f80-61cb-
 ## 🌱 **Technologies Used:**
 <p>&nbsp;</p>
 
-*Built with MERN stack:*
+*Built with the MERN stack:*
 
 * Mongo DB Atlas
 * Express (Node.js) 
