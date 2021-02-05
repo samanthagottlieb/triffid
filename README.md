@@ -103,5 +103,9 @@ npm test
 
 ## 🌱 **More Info:**
 <p>&nbsp;</p>
- 
- While developing this project, we aimed to follow Agile practices. Our record of the process can be found [**here**](https://github.com/samanthagottlieb/triffid/wiki/Log).
+
+While developing this project, we aimed to follow Agile practices. Our record of the process can be found [**here**](https://github.com/samanthagottlieb/triffid/wiki/Log).
+
+<p>&nbsp;</p>
+
+For a deeper understanding on our journey, read this [**post**](https://symion-edwards.medium.com/week-of-the-triffids-building-a-houseplant-app-for-my-bootcamp-final-project-225b59c816f7) from [**Symion Edwards' blog**](https://symion-edwards.medium.com/).
