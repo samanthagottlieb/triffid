@@ -34,7 +34,11 @@ describe("User", () => {
     it("A user can log in with the correct password", async () => {
       let user = await createUser();
       let userLoggedIn = await logInUser();
+      let parsedUser = JSON.parse(user.text);
+      let parsedUserLoggedIn = JSON.parse(userLoggedIn.text);
       expect(userLoggedIn.status).toEqual(200);
+      expect(parsedUser.name).toBe(wesleyData.name);
+      expect(parsedUserLoggedIn.user).toEqual("wesley@example.com");
     });
 
     it("A user cannot log in with an incorrect password", async () => {
