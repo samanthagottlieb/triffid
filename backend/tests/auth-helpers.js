@@ -1,6 +1,7 @@
 const app = require("../server");
 const supertest = require("supertest");
 const request = supertest(app);
+const createUser = require("./signup-helper").createUser;
 
 module.exports = wesleyData = {
   name: "Wesley",
@@ -19,3 +20,10 @@ module.exports = logInUser = async () => {
     .send(wesleyLogin)
     .set("Accept", "application/json");
 };
+
+// module.exports = getWesleyToken = () => {
+//   let user = await createUser();
+//   let userLoggedIn = await logInUser();
+//   let parsedUserLoggedIn = JSON.parse(userLoggedIn.text);
+//   let wesleyToken = parsedUserLoggedIn.token;
+// };
