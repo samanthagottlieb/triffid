@@ -31,10 +31,34 @@ describe("User", () => {
   });
 
   describe("Login", () => {
-    it("A user can log in with", async () => {
+    it("A user can log in with the correct password", async () => {
       let user = await createUser();
       let userLoggedIn = await logInUser();
       expect(userLoggedIn.status).toEqual(200);
+    });
+
+    it("A user cannot log in with an incorrect password", async () => {
+      let user = await createUser();
+      await request
+        .post("/users/login")
+        .send({
+          email: "wesley@example.com",
+          password: "mike",
+        })
+        .set("Accept", "application/json")
+        .expect(400);
+    });
+
+    it("A user cannot log in with an incorrect email", async () => {
+      let user = await createUser();
+      await request
+        .post("/users/login")
+        .send({
+          email: "mike@example.com",
+          password: "wesley",
+        })
+        .set("Accept", "application/json")
+        .expect(400);
     });
   });
 });
