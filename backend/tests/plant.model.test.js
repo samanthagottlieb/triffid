@@ -36,6 +36,27 @@ describe("Plant", () => {
           expect(response.type).toBe("application/json");
         });
     });
+    it("A user cannot add a plant without a nickname", async () => {
+      let user = await createUser();
+      let parsedUser = JSON.parse(user.text);
+      let userLoggedIn = await logInUser();
+      let parsedUserLoggedIn = JSON.parse(userLoggedIn.text);
+      let wesleyToken = parsedUserLoggedIn.token;
+      await request
+        .post("/plants/add")
+        .send({
+          userid: parsedUser._id,
+          nickname: "",
+          type: "plant",
+          lastWatered: Date.now(),
+          wateringFrequency: 7,
+          notes: "hello!",
+        })
+        .set("Authorization", `Bearer ${wesleyToken}`)
+        .then((response) => {
+          expect(response).toThrow(error)
+        });
+    });
   });
 });
 
