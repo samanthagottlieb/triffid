@@ -40,9 +40,6 @@ describe("Plant", () => {
     it("A user cannot add a plant without a nickname", async () => {
       let user = await createUser();
       let parsedUser = JSON.parse(user.text);
-      let userLoggedIn = await logInUser();
-      let parsedUserLoggedIn = JSON.parse(userLoggedIn.text);
-      let wesleyToken = parsedUserLoggedIn.token;
       let noNamePlant = new PlantModel({
         userid: parsedUser._id,
         nickname: "",
