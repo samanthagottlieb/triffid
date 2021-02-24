@@ -7,6 +7,7 @@ const authTests = require("./auth-helpers");
 const authJwt = require("../helpers/jwt");
 require("dotenv").config();
 const UserModel = require("../models/user.model");
+const PlantModel = require("../models/plant.model")
 
 beforeAll(async () => await dbConnect());
 afterEach(async () => await dbClear());
@@ -42,20 +43,16 @@ describe("Plant", () => {
       let userLoggedIn = await logInUser();
       let parsedUserLoggedIn = JSON.parse(userLoggedIn.text);
       let wesleyToken = parsedUserLoggedIn.token;
-      await request
-        .post("/plants/add")
-        .send({
-          userid: parsedUser._id,
-          nickname: "",
-          type: "plant",
-          lastWatered: Date.now(),
-          wateringFrequency: 7,
-          notes: "hello!",
-        })
-        .set("Authorization", `Bearer ${wesleyToken}`)
-        .then((response) => {
-          expect(response).toThrow(error)
-        });
+      let noNamePlant = new PlantModel({
+        userid: parsedUser._id,
+        nickname: "",
+        type: "plant",
+        lastWatered: Date.now(),
+        wateringFrequency: 7,
+        notes: "hello!"
+      })
+
+      await expect(noNamePlant.save()).rejects.toThrow()
     });
   });
 });
