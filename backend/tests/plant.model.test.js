@@ -7,7 +7,7 @@ const authTests = require("./auth-helpers");
 const authJwt = require("../helpers/jwt");
 require("dotenv").config();
 const UserModel = require("../models/user.model");
-const PlantModel = require("../models/plant.model")
+const PlantModel = require("../models/plant.model");
 
 beforeAll(async () => await dbConnect());
 afterEach(async () => await dbClear());
@@ -46,15 +46,39 @@ describe("Plant", () => {
         type: "plant",
         lastWatered: Date.now(),
         wateringFrequency: 7,
-        notes: "hello!"
-      })
+        notes: "hello!",
+      });
 
-      await expect(noNamePlant.save()).rejects.toThrow()
+      await expect(noNamePlant.save()).rejects.toThrow();
+    });
+  });
+
+  describe("GET /", () => {
+    it("Shows the user's terrarium", async () => {
+      await createUser();
+      let userLoggedIn = await logInUser();
+      let parsedUserLoggedIn = JSON.parse(userLoggedIn.text);
+      let wesleyToken = parsedUserLoggedIn.token;
+
+      await request
+        .get("/plants")
+        .set("Authorization", `Bearer ${wesleyToken}`)
+        .then((response) => {
+          expect(response.statusCode).toBe(200);
+          expect(response.type).toBe("application/json");
+        });
+
+      //   let user = await createUser();
+      //   let userLoggedIn = await logInUser();
+      // const mockUserID = jest.fn();
+      // jest.mock("../models/user.model", () => {
+      //   return jest.fn().mockImplementation(() => {
+      //     return {
+      //       userid: mockUserID,
+      //     };
+      //   });
+
+      // const plant = new Plant();
     });
   });
 });
-
-// it("Gives the right server response", async () => {
-//   let user = await createUser();
-//   expect(user.status).toEqual(200);
-// });
